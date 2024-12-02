@@ -18,7 +18,12 @@ export default function HomeScreen() {
 
   const renderItem = ({ item }: { item: DiaryEntry }) => {
     return (
-      <Card p="$3" marginTop="$4">
+      <Card
+        p="$3"
+        marginTop="$4"
+        key={item.id}
+        onPress={() => router.push(`/diary-entry/${item.id}`)}
+      >
         <Card.Header flexDirection="row" justifyContent="space-between">
           <Text>{item.title}</Text>
           <Text fontSize={10}>{item.createdAt.toLocaleDateString()}</Text>

@@ -48,6 +48,12 @@ export default function RootLayout() {
               presentation: "modal",
             }}
           />
+          <Stack.Screen
+            name="diary-entry/[id]"
+            options={{
+              presentation: "modal",
+            }}
+          />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
