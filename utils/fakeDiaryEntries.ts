@@ -1,4 +1,4 @@
-import { DiaryEntry } from "@/domain/DiaryEntry";
+import type { DiaryEntry } from "@/domain/DiaryEntry";
 
 export const fakeDiaryEntries: DiaryEntry[] = [
   {

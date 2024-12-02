@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable no-console */
 
 /**
  * This script is used to reset the project to a blank state.
@@ -74,7 +76,7 @@ const moveDirectories = async () => {
 
     console.log("\n✅ Project reset complete. Next steps:");
     console.log(
-      "1. Run `npx expo start` to start a development server.\n2. Edit app/index.tsx to edit the main screen.\n3. Delete the /app-example directory when you're done referencing it."
+      "1. Run `npx expo start` to start a development server.\n2. Edit app/index.tsx to edit the main screen.\n3. Delete the /app-example directory when you're done referencing it.",
     );
   } catch (error) {
     console.error(`Error during script execution: ${error}`);
