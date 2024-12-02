@@ -35,8 +35,14 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+        <Stack.Screen
+          name="new-diary-entry"
+          options={{
+            presentation: 'modal',
+          }}
+        />
+        </Stack>
+        <StatusBar style="auto" />
       </ThemeProvider>
     </TamaguiProvider>
   );

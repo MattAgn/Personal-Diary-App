@@ -6,6 +6,7 @@ import { FlatList } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Card, Spacer, Text, View } from 'tamagui';
 import { PlusCircle } from '@tamagui/lucide-icons';
+import { router } from 'expo-router';
 
 export default function HomeScreen() {
   const { bottom } = useSafeAreaInsets()
@@ -30,7 +31,7 @@ export default function HomeScreen() {
         <Text>Mon journal</Text>
         <FlatList data={fakeDiaryEntries} renderItem={renderItem} />
         <Spacer scaleY={1} />
-        <Button icon={PlusCircle} color={Colors["light"].tint}>Nouvelle entrée</Button>
+        <Button icon={PlusCircle} color={Colors["light"].tint} onPress={() => router.push('/new-diary-entry')}>Nouvelle entrée</Button>
       </View>
     </SafeAreaView>
   );
