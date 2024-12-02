@@ -4,7 +4,8 @@ import { DiaryEntry } from '@/domain/DiaryEntry';
 import { fakeDiaryEntries } from '@/utils/fakeDiaryEntries';
 import { FlatList } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Card, Text, View } from 'tamagui';
+import { Button, Card, Spacer, Text, View } from 'tamagui';
+import { PlusCircle } from '@tamagui/lucide-icons';
 
 export default function HomeScreen() {
   const { bottom } = useSafeAreaInsets()
@@ -25,9 +26,11 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 30, backgroundColor: Colors["light"].background, marginBottom: bottom }}>
-        <View flex={1} >
+      <View flex={1} >
         <Text>Mon journal</Text>
         <FlatList data={fakeDiaryEntries} renderItem={renderItem} />
+        <Spacer scaleY={1} />
+        <Button icon={PlusCircle} color={Colors["light"].tint}>Nouvelle entrée</Button>
       </View>
     </SafeAreaView>
   );
