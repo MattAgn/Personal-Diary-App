@@ -1,5 +1,6 @@
 import { PlusCircle } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
+import { useAtom } from "jotai";
 import { FlatList } from "react-native";
 import {
   SafeAreaView,
@@ -9,10 +10,11 @@ import { Button, Card, Spacer, styled, Text, View } from "tamagui";
 
 import { Colors } from "@/constants/Colors";
 import type { DiaryEntry } from "@/domain/DiaryEntry";
-import { fakeDiaryEntries } from "@/utils/fakeDiaryEntries";
+import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
 export default function HomeScreen() {
   const { bottom } = useSafeAreaInsets();
+  const [diaryEntries] = useAtom(diaryEntriesAtom);
 
   const renderItem = ({ item }: { item: DiaryEntry }) => {
     return (
@@ -31,7 +33,7 @@ export default function HomeScreen() {
     <StyledSafeAreaView marginBottom={bottom}>
       <View flex={1}>
         <Text>Mon journal</Text>
-        <FlatList data={fakeDiaryEntries} renderItem={renderItem} />
+        <FlatList data={diaryEntries} renderItem={renderItem} />
         <Spacer scaleY={1} />
         <Button
           icon={PlusCircle}
