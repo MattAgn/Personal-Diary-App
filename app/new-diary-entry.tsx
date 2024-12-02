@@ -1,25 +1,22 @@
+import { Save } from "@tamagui/lucide-icons";
 import { Stack } from "expo-router";
-import { StyleSheet } from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button, Input } from "tamagui";
 
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-
-export default function NotFoundScreen() {
+export default function NewDiaryEntry() {
   return (
-    <>
-      <Stack.Screen options={{ title: "New" }} />
-      <ThemedView style={styles.container}>
-        <ThemedText type="title">Nouvelle entrée</ThemedText>
-      </ThemedView>
-    </>
+    <SafeAreaView>
+      <Stack.Screen options={{ title: "New Diary Entry" }} />
+      <Input
+        placeholder="What's on your mind?"
+        multiline
+        numberOfLines={20}
+        backgroundColor={"$colorTransparent"}
+      />
+      <Button icon={Save} color={Colors["light"].tint} margin="$4">
+        Save
+      </Button>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-});
