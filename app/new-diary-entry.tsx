@@ -5,9 +5,10 @@ import { useAtom } from "jotai";
 import { useState } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Image, Input, ScrollView, Spacer } from "tamagui";
+import { Button, Image, Input, ScrollView, Spacer, XStack } from "tamagui";
 import { v6 as uuidv6 } from "uuid";
 
+import { allLabels } from "@/domain/DiaryEntry";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
 export default function NewDiaryEntry() {
@@ -22,6 +23,7 @@ export default function NewDiaryEntry() {
         content,
         title,
         media: image,
+        labels: [],
       },
     ]);
     router.back();
@@ -47,9 +49,24 @@ export default function NewDiaryEntry() {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView p={"$3"}>
         <Stack.Screen options={{ title: "New Diary Entry" }} />
         <Input placeholder="Title" onChangeText={setTitle} />
+        <Spacer scaleY={"$1"} />
+        <XStack gap={"$2"} flexWrap="wrap">
+          {allLabels.map((label) => (
+            <Button
+              key={label}
+              backgroundColor={"$accentBackground"}
+              size={"$2"}
+              borderRadius={20}
+              paddingHorizontal={"$3"}
+            >
+              {label}
+            </Button>
+          ))}
+        </XStack>
+        <Spacer scaleY={"$1"} />
         <Input
           placeholder="What's on your mind?"
           multiline
