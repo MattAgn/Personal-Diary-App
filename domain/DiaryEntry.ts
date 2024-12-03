@@ -3,4 +3,5 @@ export type DiaryEntry = {
   title: string;
   content: string;
   createdAt: Date;
+  media: string | null;
 };
