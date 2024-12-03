@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import "react-native-reanimated";
+// important to import this before uuid which is used in the new-diary-entry screen
+import "react-native-get-random-values";
 
 import {
   DarkTheme,
