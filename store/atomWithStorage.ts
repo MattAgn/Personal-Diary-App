@@ -27,10 +27,28 @@ export const atomWithStorage = <T>(key: string, initialValue: T) =>
   atomWithStorageJotai<T>(
     key,
     initialValue,
-    createJSONStorage<T>(() => ({
-      getItem,
-      setItem,
-      removeItem,
-      clearAll,
-    })),
+    createJSONStorage<T>(
+      () => ({
+        getItem,
+        setItem,
+        removeItem,
+        clearAll,
+      }),
+      {
+        reviver: (_, value) => {
+          if (
+            value &&
+            typeof value === "object" &&
+            "createdAt" in value &&
+            typeof value.createdAt === "string"
+          ) {
+            return {
+              ...value,
+              createdAt: new Date(value.createdAt),
+            };
+          }
+          return value;
+        },
+      },
+    ),
   );
