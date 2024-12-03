@@ -7,13 +7,14 @@ import { useCreateDiaryEntryAtom } from "@/store/diaryEntriesAtom";
 
 export default function DiaryEntry() {
   const { id } = useLocalSearchParams();
+  const diaryEntryAtom = useCreateDiaryEntryAtom(
+    typeof id === "string" ? id : "",
+  );
+  const [entry] = useAtom(diaryEntryAtom);
 
   if (typeof id !== "string") {
     throw new Error("Single id is required");
   }
-
-  const diaryEntryAtom = useCreateDiaryEntryAtom(id);
-  const [entry] = useAtom(diaryEntryAtom);
 
   return (
     <StyledSafeAreaView>
