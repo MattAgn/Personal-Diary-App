@@ -1,11 +1,15 @@
-import { PencilLine, Save } from "@tamagui/lucide-icons";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { PencilLine, Save, Trash } from "@tamagui/lucide-icons";
+import { router, Stack, useLocalSearchParams } from "expo-router";
 import { useAtom } from "jotai";
 import { useState } from "react";
+import { Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Image, Input, Spacer, styled, Text } from "tamagui";
 
-import { useCreateDiaryEntryAtom } from "@/store/diaryEntriesAtom";
+import {
+  diaryEntriesAtom,
+  useCreateDiaryEntryAtom,
+} from "@/store/diaryEntriesAtom";
 
 export default function DiaryEntry() {
   const { id } = useLocalSearchParams();
@@ -13,6 +17,7 @@ export default function DiaryEntry() {
     typeof id === "string" ? id : "",
   );
   const [entry, setEntry] = useAtom(diaryEntryAtom);
+  const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(entry?.content);
 
@@ -23,6 +28,24 @@ export default function DiaryEntry() {
   const saveEdits = () => {
     setEntry({ content });
     setIsEditing(false);
+  };
+
+  const deleteEntry = () => {
+    setDiaryEntries(
+      diaryEntries.filter((currentEntry) => currentEntry.id !== id),
+    );
+    router.back();
+  };
+
+  const showDeleteAlert = () => {
+    Alert.alert("Delete", "Are you sure you want to delete this entry?", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => deleteEntry(),
+      },
+    ]);
   };
 
   return (
@@ -60,6 +83,9 @@ export default function DiaryEntry() {
           Edit
         </Button>
       )}
+      <Button onPress={() => showDeleteAlert()} color={"red"} icon={Trash}>
+        Delete
+      </Button>
     </StyledSafeAreaView>
   );
 }
