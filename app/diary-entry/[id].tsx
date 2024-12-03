@@ -3,7 +3,7 @@ import { Stack, useLocalSearchParams } from "expo-router";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Input, Spacer, styled, Text } from "tamagui";
+import { Button, Image, Input, Spacer, styled, Text } from "tamagui";
 
 import { useCreateDiaryEntryAtom } from "@/store/diaryEntriesAtom";
 
@@ -42,6 +42,15 @@ export default function DiaryEntry() {
       )}
       <Spacer scaleY={1} />
       <Text>{entry?.createdAt.toLocaleDateString()}</Text>
+      <Spacer scaleY={1} />
+      {entry?.media && (
+        <Image
+          source={{ uri: entry.media }}
+          width={200}
+          height={200}
+          alignSelf="center"
+        />
+      )}
       {isEditing ? (
         <Button onPress={() => saveEdits()} icon={Save}>
           Save
