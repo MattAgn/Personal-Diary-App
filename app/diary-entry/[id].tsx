@@ -13,13 +13,20 @@ import {
 } from "@/store/diaryEntriesAtom";
 
 export default function DiaryEntry() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, isEditing: isEditingParam } = useLocalSearchParams<{
+    id: string;
+    isEditing?: string;
+  }>();
   const diaryEntryAtom = useCreateDiaryEntryAtom(id);
 
   const [entry, setEntry] = useAtom(diaryEntryAtom);
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
-  const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(entry?.content);
+
+  const isEditing = isEditingParam === "true";
+  const setIsEditing = (value: boolean) => {
+    router.setParams({ isEditing: value ? "true" : "false" });
+  };
 
   const saveEdits = () => {
     setEntry({ content });
