@@ -4,8 +4,9 @@ import { useAtom } from "jotai";
 import { useState } from "react";
 import { Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Image, Input, Spacer, styled, Text } from "tamagui";
+import { Button, Image, Input, Spacer, styled, Text, XStack } from "tamagui";
 
+import { LabelPill } from "@/components/LabelPill";
 import {
   diaryEntriesAtom,
   useCreateDiaryEntryAtom,
@@ -16,6 +17,7 @@ export default function DiaryEntry() {
   const diaryEntryAtom = useCreateDiaryEntryAtom(
     typeof id === "string" ? id : "",
   );
+
   const [entry, setEntry] = useAtom(diaryEntryAtom);
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
   const [isEditing, setIsEditing] = useState(false);
@@ -51,6 +53,10 @@ export default function DiaryEntry() {
   return (
     <StyledSafeAreaView>
       <Stack.Screen options={{ title: entry?.title }} />
+      <Spacer scaleY={1} />
+      <XStack gap={"$2"} flexWrap="wrap">
+        {entry?.labels.map((label) => <LabelPill key={label} label={label} />)}
+      </XStack>
       <Spacer scaleY={1} />
       {isEditing ? (
         <Input
