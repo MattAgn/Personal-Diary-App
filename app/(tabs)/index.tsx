@@ -18,13 +18,17 @@ export default function HomeScreen() {
   const [diaryEntries] = useAtom(diaryEntriesAtom);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredEntries = useMemo(() => {
+  const filteredAndSortedEntries = useMemo(() => {
     const query = searchQuery.toLowerCase();
-    return diaryEntries.filter(
+    const filteredEntries = diaryEntries.filter(
       (entry) =>
         entry.title.toLowerCase().includes(query) ||
         entry.content.toLowerCase().includes(query),
     );
+    const sortedEntries = filteredEntries.sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
+    );
+    return sortedEntries;
   }, [diaryEntries, searchQuery]);
 
   const renderItem = ({ item }: { item: DiaryEntry }) => {
@@ -55,7 +59,7 @@ export default function HomeScreen() {
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
-        <FlatList data={filteredEntries} renderItem={renderItem} />
+        <FlatList data={filteredAndSortedEntries} renderItem={renderItem} />
         <Spacer scaleY={"$2"} />
         <Spacer scaleY={1} />
         <Button
