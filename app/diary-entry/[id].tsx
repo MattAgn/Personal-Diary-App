@@ -13,19 +13,13 @@ import {
 } from "@/store/diaryEntriesAtom";
 
 export default function DiaryEntry() {
-  const { id } = useLocalSearchParams();
-  const diaryEntryAtom = useCreateDiaryEntryAtom(
-    typeof id === "string" ? id : "",
-  );
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const diaryEntryAtom = useCreateDiaryEntryAtom(id);
 
   const [entry, setEntry] = useAtom(diaryEntryAtom);
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(entry?.content);
-
-  if (typeof id !== "string") {
-    throw new Error("Single id is required");
-  }
 
   const saveEdits = () => {
     setEntry({ content });
