@@ -52,7 +52,19 @@ export default function DiaryEntry() {
 
   return (
     <StyledSafeAreaView>
-      <Stack.Screen options={{ title: entry?.title }} />
+      <Stack.Screen
+        options={{
+          title: entry?.createdAt.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          }),
+        }}
+      />
+      <Spacer scaleY={1} />
+      <Text fontWeight="bold" fontSize={"$5"}>
+        {entry?.title}
+      </Text>
       <Spacer scaleY={1} />
       <XStack gap={"$2"} flexWrap="wrap">
         {entry?.labels.map((label) => <LabelPill key={label} label={label} />)}
@@ -70,7 +82,7 @@ export default function DiaryEntry() {
         <Text>{entry?.content}</Text>
       )}
       <Spacer scaleY={1} />
-      <Text>{entry?.createdAt.toLocaleDateString()}</Text>
+
       <Spacer scaleY={1} />
       {entry?.media && (
         <Image
