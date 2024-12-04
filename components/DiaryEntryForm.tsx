@@ -36,12 +36,12 @@ export const DiaryEntryForm = ({
   const [media, setMedia] = useState<string | null>(initialMedia);
   const [labels, setLabels] = useState<Label[]>(initialLabels);
 
-  const toggleLabel = (label: Label) => {
+  const toggleLabel = (selectedLabel: Label) => {
     setLabels((prev) => {
-      if (prev.includes(label)) {
-        return prev.filter((l) => l !== label);
+      if (prev.includes(selectedLabel)) {
+        return prev.filter((label) => label !== selectedLabel);
       }
-      return [...prev, label];
+      return [...prev, selectedLabel];
     });
   };
 
