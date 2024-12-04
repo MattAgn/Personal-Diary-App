@@ -1,4 +1,4 @@
-import { History } from "@tamagui/lucide-icons";
+import { FileDown, History } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { Alert } from "react-native";
@@ -8,6 +8,7 @@ import { Button, styled, Text } from "tamagui";
 
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 import { fakeDiaryEntries } from "@/utils/fakeDiaryEntries";
+import { shareDiaryEntriesPdf } from "@/utils/shareDiaryEntriesPdf";
 
 export default function TabTwoScreen() {
   const [_, setDiaryEntries] = useAtom(diaryEntriesAtom);
@@ -26,11 +27,18 @@ export default function TabTwoScreen() {
     );
   };
 
+  const handleShareDiaryEntries = async () => {
+    await shareDiaryEntriesPdf(fakeDiaryEntries);
+  };
+
   return (
     <StyledSafeAreaView>
       <Text fontSize={24}>Settings</Text>
       <Button icon={History} onPress={onResetDiary} scale={1.1}>
         Reset diary
+      </Button>
+      <Button icon={FileDown} onPress={handleShareDiaryEntries} scale={1.1}>
+        Export diary to pdf
       </Button>
     </StyledSafeAreaView>
   );
