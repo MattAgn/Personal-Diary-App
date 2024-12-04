@@ -1,12 +1,14 @@
-import { PencilLine, Save, Trash } from "@tamagui/lucide-icons";
-import { router, Stack, useLocalSearchParams } from "expo-router";
+import { PencilLine, Trash } from "@tamagui/lucide-icons";
+import { Redirect, router, Stack, useLocalSearchParams } from "expo-router";
 import { useAtom } from "jotai";
-import { useState } from "react";
 import { Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Image, Input, Spacer, styled, Text, XStack } from "tamagui";
+import { Button, Spacer, styled } from "tamagui";
 
-import { LabelPill } from "@/components/LabelPill";
+import { DiaryEntryDetails } from "@/components/DiaryEntryDetails";
+import type { DiaryEntryFormData } from "@/components/DiaryEntryForm";
+import { DiaryEntryForm } from "@/components/DiaryEntryForm";
+import type { DiaryEntry } from "@/domain/DiaryEntry";
 import {
   diaryEntriesAtom,
   useCreateDiaryEntryAtom,
@@ -21,7 +23,6 @@ export default function DiaryEntry() {
 
   const [entry, setEntry] = useAtom(diaryEntryAtom);
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
-  const [content, setContent] = useState(entry?.content);
 
   if (!entry) {
     return <Redirect href="/+not-found" />;
@@ -32,8 +33,8 @@ export default function DiaryEntry() {
     router.setParams({ isEditing: value ? "true" : "false" });
   };
 
-  const saveEdits = () => {
-    setEntry({ content });
+  const saveEdits = (updatedEntry: DiaryEntryFormData) => {
+    setEntry(updatedEntry);
     setIsEditing(false);
   };
 
@@ -66,46 +67,26 @@ export default function DiaryEntry() {
           }),
         }}
       />
-      <Spacer scaleY={1} />
-      <Text fontWeight="bold" fontSize={"$5"}>
-        {entry?.title}
-      </Text>
-      <Spacer scaleY={1} />
-      <XStack gap={"$2"} flexWrap="wrap">
-        {entry?.labels.map((label) => <LabelPill key={label} label={label} />)}
-      </XStack>
-      <Spacer scaleY={1} />
-      {isEditing ? (
-        <Input
-          value={content}
-          onChangeText={(text) => setContent(text)}
-          multiline
-          numberOfLines={20}
-          backgroundColor={"$colorTransparent"}
-        />
-      ) : (
-        <Text>{entry?.content}</Text>
-      )}
-      <Spacer scaleY={1} />
 
-      <Spacer scaleY={1} />
-      {entry?.media && (
-        <Image
-          source={{ uri: entry.media }}
-          width={200}
-          height={200}
-          alignSelf="center"
-        />
-      )}
+      <Spacer scaleY={"$2"} />
       {isEditing ? (
-        <Button onPress={() => saveEdits()} icon={Save}>
-          Save
-        </Button>
+        <DiaryEntryForm
+          initialTitle={entry.title}
+          initialContent={entry.content}
+          initialMedia={entry.media}
+          initialLabels={entry.labels}
+          onSubmit={saveEdits}
+        />
       ) : (
+        <DiaryEntryDetails diaryEntry={entry} />
+      )}
+      <Spacer scaleY={"$2"} />
+
+      {!isEditing ? (
         <Button onPress={() => setIsEditing(true)} icon={PencilLine}>
           Edit
         </Button>
-      )}
+      ) : null}
       <Button onPress={() => showDeleteAlert()} color={"red"} icon={Trash}>
         Delete
       </Button>
