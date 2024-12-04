@@ -34,21 +34,24 @@ export const atomWithStorage = <T>(key: string, initialValue: T) =>
         removeItem,
         clearAll,
       }),
-      {
-        reviver: (_, value) => {
-          if (
-            value &&
-            typeof value === "object" &&
-            "createdAt" in value &&
-            typeof value.createdAt === "string"
-          ) {
-            return {
-              ...value,
-              createdAt: new Date(value.createdAt),
-            };
-          }
-          return value;
-        },
-      },
+      { reviver: reviverWithDateParsing },
     ),
   );
+
+/**
+ * Reviver function for JSON parsing that handles date conversion
+ * Converts string dates back to Date objects for objects with a createdAt property
+ * @param {unknown} value The value being parsed
+ * @returns {unknown} The value with dates converted if applicable
+ */
+const reviverWithDateParsing = (value: unknown): unknown => {
+  if (
+    value &&
+    typeof value === "object" &&
+    "createdAt" in value &&
+    typeof value.createdAt === "string"
+  ) {
+    return { ...value, createdAt: new Date(value.createdAt) };
+  }
+  return value;
+};
