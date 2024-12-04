@@ -60,6 +60,12 @@ export default function HomeScreen() {
     ]);
   };
 
+  const editEntry = () => {
+    setIsSheetOpen(false);
+    setSelectedEntryId(undefined);
+    router.push(`/diary-entry/${selectedEntryId}?isEditing=true`);
+  };
+
   const renderItem = ({ item }: { item: DiaryEntry }) => {
     return (
       <Card
@@ -113,7 +119,7 @@ export default function HomeScreen() {
         isSheetOpen={isSheetOpen}
         setIsSheetOpen={setIsSheetOpen}
         onDelete={showDeleteAlert}
-        onEdit={() => {}}
+        onEdit={editEntry}
       />
     </StyledSafeAreaView>
   );
