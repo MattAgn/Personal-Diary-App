@@ -1,7 +1,7 @@
 import { Ellipsis } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { FlatList } from "react-native";
-import { Button, Card, Spacer, Text } from "tamagui";
+import { Button, Card, Spacer, Text, View } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 
@@ -42,5 +42,19 @@ export function DiaryEntriesList({
     );
   };
 
-  return <FlatList data={entries} renderItem={renderItem} />;
+  return (
+    <FlatList
+      data={entries}
+      renderItem={renderItem}
+      ListEmptyComponent={<EmptyList />}
+    />
+  );
 }
+
+const EmptyList = () => {
+  return (
+    <View alignItems="center" padding="$4">
+      <Text fontSize={"$5"}>No entries found matching your search</Text>
+    </View>
+  );
+};
