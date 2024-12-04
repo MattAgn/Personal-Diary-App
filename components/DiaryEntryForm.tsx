@@ -1,6 +1,7 @@
 import { Camera, Save } from "@tamagui/lucide-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
+import { Alert } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { Button, Image, Input, Spacer, XStack } from "tamagui";
 
@@ -46,15 +47,20 @@ export const DiaryEntryForm = ({
   };
 
   const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images", "videos"],
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images", "videos"],
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
 
-    if (!result.canceled) {
-      setMedia(result.assets[0].uri);
+      if (!result.canceled) {
+        setMedia(result.assets[0].uri);
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Error", "Failed to pick image");
     }
   };
 
