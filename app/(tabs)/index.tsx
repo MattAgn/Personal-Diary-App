@@ -2,7 +2,7 @@ import { Ellipsis, PlusCircle } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { useMemo, useState } from "react";
-import { FlatList } from "react-native";
+import { Alert, FlatList } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -16,9 +16,10 @@ import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
 export default function HomeScreen() {
   const { bottom } = useSafeAreaInsets();
-  const [diaryEntries] = useAtom(diaryEntriesAtom);
+  const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [selectedEntryId, setSelectedEntryId] = useState<string>();
 
   const filteredAndSortedEntries = useMemo(() => {
     const query = searchQuery.toLowerCase();
@@ -32,6 +33,32 @@ export default function HomeScreen() {
     );
     return sortedEntries;
   }, [diaryEntries, searchQuery]);
+
+  const openActionSheet = (id: string) => {
+    setSelectedEntryId(id);
+    setIsSheetOpen(true);
+  };
+
+  const deleteEntry = () => {
+    setDiaryEntries(
+      diaryEntries.filter(
+        (currentEntry) => currentEntry.id !== selectedEntryId,
+      ),
+    );
+    setIsSheetOpen(false);
+    setSelectedEntryId(undefined);
+  };
+
+  const showDeleteAlert = () => {
+    Alert.alert("Delete", "Are you sure you want to delete this entry?", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => deleteEntry(),
+      },
+    ]);
+  };
 
   const renderItem = ({ item }: { item: DiaryEntry }) => {
     return (
@@ -50,7 +77,7 @@ export default function HomeScreen() {
             paddingHorizontal={"$3"}
             borderRadius={"$3"}
             backgroundColor={"$accentBackground"}
-            onPress={() => setIsSheetOpen(true)}
+            onPress={() => openActionSheet(item.id)}
           />
         </Card.Header>
         <Text>{item.title}</Text>
@@ -85,7 +112,7 @@ export default function HomeScreen() {
       <ActionSheet
         isSheetOpen={isSheetOpen}
         setIsSheetOpen={setIsSheetOpen}
-        onDelete={() => {}}
+        onDelete={showDeleteAlert}
         onEdit={() => {}}
       />
     </StyledSafeAreaView>
