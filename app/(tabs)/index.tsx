@@ -1,17 +1,17 @@
-import { Ellipsis, PlusCircle } from "@tamagui/lucide-icons";
+import { PlusCircle } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { useMemo, useState } from "react";
-import { Alert, FlatList } from "react-native";
+import { Alert } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
-import { Button, Card, Input, Spacer, styled, Text, View } from "tamagui";
+import { Button, Input, Spacer, styled, Text, View } from "tamagui";
 
 import { ActionSheet } from "@/components/ActionSheet";
+import { DiaryEntriesList } from "@/components/DiaryEntriesList";
 import { Colors } from "@/constants/Colors";
-import type { DiaryEntry } from "@/domain/DiaryEntry";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
 export default function HomeScreen() {
@@ -66,34 +66,6 @@ export default function HomeScreen() {
     router.push(`/diary-entry/${selectedEntryId}?isEditing=true`);
   };
 
-  const renderItem = ({ item }: { item: DiaryEntry }) => {
-    return (
-      <Card
-        p="$3"
-        marginTop="$4"
-        key={item.id}
-        onPress={() => router.push(`/diary-entry/${item.id}`)}
-      >
-        <Card.Header flexDirection="row" justifyContent="space-between">
-          <Text fontSize={10}>{item.createdAt.toLocaleDateString()}</Text>
-          <Button
-            hitSlop={15}
-            icon={Ellipsis}
-            size={"$1"}
-            paddingHorizontal={"$3"}
-            borderRadius={"$3"}
-            backgroundColor={"$accentBackground"}
-            onPress={() => openActionSheet(item.id)}
-          />
-        </Card.Header>
-        <Text>{item.title}</Text>
-        <Spacer scaleY={"$1"} />
-        <Text numberOfLines={3}>{item.content}</Text>
-        <Card.Footer></Card.Footer>
-      </Card>
-    );
-  };
-
   return (
     <StyledSafeAreaView marginBottom={bottom}>
       <View flex={1} padding="$4" marginBottom={"$3"}>
@@ -104,7 +76,10 @@ export default function HomeScreen() {
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
-        <FlatList data={filteredAndSortedEntries} renderItem={renderItem} />
+        <DiaryEntriesList
+          entries={filteredAndSortedEntries}
+          onActionButtonPress={openActionSheet}
+        />
         <Spacer scaleY={"$2"} />
         <Spacer scaleY={1} />
         <Button
