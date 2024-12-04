@@ -8,6 +8,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Image, Input, ScrollView, Spacer, XStack } from "tamagui";
 import { v6 as uuidv6 } from "uuid";
 
+import { LabelButton } from "@/components/LabelButton";
+import type { Label } from "@/domain/DiaryEntry";
 import { allLabels } from "@/domain/DiaryEntry";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
@@ -23,7 +25,7 @@ export default function NewDiaryEntry() {
         content,
         title,
         media: image,
-        labels: [],
+        labels,
       },
     ]);
     router.back();
@@ -32,6 +34,16 @@ export default function NewDiaryEntry() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<string | null>(null);
+  const [labels, setLabels] = useState<Label[]>([]);
+
+  const toggleLabel = (label: Label) => {
+    setLabels((prev) => {
+      if (prev.includes(label)) {
+        return prev.filter((l) => l !== label);
+      }
+      return [...prev, label];
+    });
+  };
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -55,15 +67,12 @@ export default function NewDiaryEntry() {
         <Spacer scaleY={"$1"} />
         <XStack gap={"$2"} flexWrap="wrap">
           {allLabels.map((label) => (
-            <Button
+            <LabelButton
               key={label}
-              backgroundColor={"$accentBackground"}
-              size={"$2"}
-              borderRadius={20}
-              paddingHorizontal={"$3"}
-            >
-              {label}
-            </Button>
+              isActive={labels.includes(label)}
+              label={label}
+              toggleLabel={() => toggleLabel(label)}
+            />
           ))}
         </XStack>
         <Spacer scaleY={"$1"} />
