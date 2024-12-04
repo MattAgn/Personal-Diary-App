@@ -8,11 +8,13 @@ import type { DiaryEntry } from "@/domain/DiaryEntry";
 type DiaryEntriesListProps = {
   entries: DiaryEntry[];
   onActionButtonPress: (id: string) => void;
+  EmptyListComponent: React.ReactElement;
 };
 
 export function DiaryEntriesList({
   entries,
   onActionButtonPress,
+  EmptyListComponent,
 }: DiaryEntriesListProps) {
   const renderItem = ({ item }: { item: DiaryEntry }) => {
     return (
@@ -46,7 +48,22 @@ export function DiaryEntriesList({
     <FlatList
       data={entries}
       renderItem={renderItem}
-      ListEmptyComponent={<EmptyList />}
+      ListEmptyComponent={EmptyListComponent}
     />
   );
 }
+
+export const DiaryEntriesNoSearchResult = () => {
+  return (
+    <View alignItems="center" padding="$4">
+      <Text fontSize={"$5"}>No entries found matching your search</Text>
+    </View>
+  );
+};
+export const DiaryNoEntriesYet = () => {
+  return (
+    <View alignItems="center" padding="$4">
+      <Text fontSize={"$5"}>No entries yet, add your first one!</Text>
+    </View>
+  );
+};

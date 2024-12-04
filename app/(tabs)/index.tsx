@@ -10,7 +10,11 @@ import {
 import { Button, Input, Spacer, styled, Text, View } from "tamagui";
 
 import { ActionSheet } from "@/components/ActionSheet";
-import { DiaryEntriesList } from "@/components/DiaryEntriesList";
+import {
+  DiaryEntriesList,
+  DiaryEntriesNoSearchResult,
+  DiaryNoEntriesYet,
+} from "@/components/DiaryEntriesList";
 import { Colors } from "@/constants/Colors";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
@@ -79,6 +83,13 @@ export default function HomeScreen() {
         <DiaryEntriesList
           entries={filteredAndSortedEntries}
           onActionButtonPress={openActionSheet}
+          EmptyListComponent={
+            searchQuery !== "" ? (
+              <DiaryEntriesNoSearchResult />
+            ) : (
+              <DiaryNoEntriesYet />
+            )
+          }
         />
         <Spacer scaleY={"$2"} />
         <Spacer scaleY={1} />
