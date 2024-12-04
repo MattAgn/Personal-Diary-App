@@ -52,7 +52,7 @@ export default function HomeScreen() {
   return (
     <StyledSafeAreaView marginBottom={bottom}>
       <View flex={1}>
-        <Text>Mon journal</Text>
+        <Text>My diary</Text>
         <Spacer scaleY={"$1"} />
         <Input
           placeholder="Search"
@@ -67,7 +67,7 @@ export default function HomeScreen() {
           color={Colors["light"].tint}
           onPress={() => router.push("/new-diary-entry")}
         >
-          Nouvelle entrée
+          New entry
         </Button>
       </View>
     </StyledSafeAreaView>
