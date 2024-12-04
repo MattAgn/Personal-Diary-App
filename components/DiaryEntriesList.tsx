@@ -50,11 +50,3 @@ export function DiaryEntriesList({
     />
   );
 }
-
-const EmptyList = () => {
-  return (
-    <View alignItems="center" padding="$4">
-      <Text fontSize={"$5"}>No entries found matching your search</Text>
-    </View>
-  );
-};

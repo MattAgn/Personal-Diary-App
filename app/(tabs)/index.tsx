@@ -28,10 +28,10 @@ export default function HomeScreen() {
         entry.title.toLowerCase().includes(query) ||
         entry.content.toLowerCase().includes(query),
     );
-    const sortedEntries = filteredEntries.sort(
+    const sortedEntriesNewestFirst = filteredEntries.sort(
       (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
     );
-    return sortedEntries;
+    return sortedEntriesNewestFirst;
   }, [diaryEntries, searchQuery]);
 
   const openActionSheet = (id: string) => {
