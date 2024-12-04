@@ -23,6 +23,10 @@ export default function DiaryEntry() {
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
   const [content, setContent] = useState(entry?.content);
 
+  if (!entry) {
+    return <Redirect href="/+not-found" />;
+  }
+
   const isEditing = isEditingParam === "true";
   const setIsEditing = (value: boolean) => {
     router.setParams({ isEditing: value ? "true" : "false" });
