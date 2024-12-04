@@ -44,14 +44,14 @@ export const atomWithStorage = <T>(key: string, initialValue: T) =>
  * @param {unknown} value The value being parsed
  * @returns {unknown} The value with dates converted if applicable
  */
-const reviverWithDateParsing = (value: unknown): unknown => {
-  if (
-    value &&
-    typeof value === "object" &&
-    "createdAt" in value &&
-    typeof value.createdAt === "string"
-  ) {
-    return { ...value, createdAt: new Date(value.createdAt) };
+const reviverWithDateParsing = (key: string, value: unknown): unknown => {
+  if (key === "createdAt" && typeof value === "string") {
+    const date = new Date(value);
+    // TODO: ideally we should delete the entry from storage otherwise it will be treated as Date in the rest of the app
+    if (isNaN(date.getTime())) {
+      return value;
+    }
+    return date;
   }
   return value;
 };
