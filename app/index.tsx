@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Plus } from "@tamagui/lucide-icons";
+import { Plus, Settings } from "@tamagui/lucide-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
@@ -72,9 +72,22 @@ export default function HomeScreen() {
     <StyledLinearGradient colors={["#0E1020", "#5C3A65"]}>
       <StyledSafeAreaView edges={["top"]}>
         <View flex={1} padding="$4" marginBottom={"$3"}>
-          <H1 color="white" size={"$9"}>
-            My diary
-          </H1>
+          <XStack
+            justifyContent="space-between"
+            alignItems="center"
+            paddingRight={"$2"}
+          >
+            <H1 color="white" size={"$9"}>
+              My diary
+            </H1>
+            <RoundIconButton
+              size={30}
+              style={{ backgroundColor: "transparent" }}
+              onPress={() => router.push("/settings")}
+            >
+              <Settings color={"white"} />
+            </RoundIconButton>
+          </XStack>
           <Spacer scaleY={"$1"} />
           <Input
             placeholder="Search"

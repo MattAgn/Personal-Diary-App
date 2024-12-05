@@ -5,15 +5,24 @@ const BUTTON_SIZE = 80;
 
 type RoundIconButtonProps = PressableProps & {
   style?: ViewStyle;
+  size?: number;
 };
 
 export const RoundIconButton = ({
   children,
   style,
+  size = BUTTON_SIZE,
   ...props
 }: RoundIconButtonProps) => {
   return (
-    <Pressable style={[styles.button, style]} {...props}>
+    <Pressable
+      style={[
+        styles.button,
+        { height: size, width: size, borderRadius: size / 2 },
+        style,
+      ]}
+      {...props}
+    >
       {children}
     </Pressable>
   );
@@ -21,9 +30,6 @@ export const RoundIconButton = ({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: BUTTON_SIZE / 2,
-    height: BUTTON_SIZE,
-    width: BUTTON_SIZE,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#5E5CE5",
