@@ -1,11 +1,13 @@
 /* eslint-disable react/no-unstable-nested-components */
+import { BookOpen, Settings } from "@tamagui/lucide-icons";
 import { Tabs } from "expo-router";
 import { Platform } from "react-native";
 
 import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
 import TabBarBackground from "@/components/ui/TabBarBackground";
 import { Colors } from "@/constants/Colors";
+
+const TAB_ICON_SIZE = 24;
 
 export default function TabLayout() {
   return (
@@ -27,9 +29,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Diary",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+            <BookOpen size={TAB_ICON_SIZE} color={color} />
           ),
         }}
       />
@@ -38,7 +40,7 @@ export default function TabLayout() {
         options={{
           title: "Settings",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="gear" color={color} />
+            <Settings size={TAB_ICON_SIZE} color={color} />
           ),
         }}
       />
