@@ -8,12 +8,14 @@
    npm install
    ```
 
-2. Build the app
+2. Build the app.
 
    ```bash
    npx expo run:android
    npx expo run:ios
    ```
+
+   These commands will build the native app for Android and iOS. Run it every time you add a new native dependency or when you want to install the app on a new device.
 
 3. Start metro
 
