@@ -51,7 +51,7 @@ export const shareDiaryEntriesPdf = async (diaryEntries: DiaryEntry[]) => {
       throw new Error("Failed to generate PDF file, filePath is not defined");
     }
 
-    await shareAsync(file.filePath, {
+    await shareAsync(`file://${file.filePath}`, {
       UTI: ".pdf",
       mimeType: "application/pdf",
     });
