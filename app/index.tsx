@@ -1,11 +1,12 @@
-import { PlusCircle } from "@tamagui/lucide-icons";
+/* eslint-disable react-native/no-inline-styles */
+import { Plus } from "@tamagui/lucide-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { useMemo, useState } from "react";
 import { Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Input, Spacer, styled, Text, View } from "tamagui";
+import { Input, Spacer, styled, Text, View, XStack } from "tamagui";
 
 import { ActionSheet } from "@/components/ActionSheet";
 import {
@@ -13,7 +14,7 @@ import {
   DiaryEntriesNoSearchResult,
   DiaryNoEntriesYet,
 } from "@/components/DiaryEntriesList";
-import { Colors } from "@/constants/Colors";
+import { RoundIconButton } from "@/components/RoundIconButton";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
 export default function HomeScreen() {
@@ -91,13 +92,14 @@ export default function HomeScreen() {
           />
           <Spacer scaleY={"$2"} />
           <Spacer scaleY={1} />
-          <Button
-            icon={PlusCircle}
-            color={Colors["light"].tint}
-            onPress={() => router.push("/new-diary-entry")}
-          >
-            New entry
-          </Button>
+          <BottomButtonContainer>
+            <RoundIconButton
+              onPress={() => router.push("/new-diary-entry")}
+              style={{ alignSelf: "center" }}
+            >
+              <Plus color={"white"} />
+            </RoundIconButton>
+          </BottomButtonContainer>
         </View>
         <ActionSheet
           isSheetOpen={isSheetOpen}
@@ -116,4 +118,12 @@ const StyledSafeAreaView = styled(SafeAreaView, {
 
 const StyledLinearGradient = styled(LinearGradient, {
   flex: 1,
+});
+
+const BottomButtonContainer = styled(XStack, {
+  justifyContent: "center",
+  position: "absolute",
+  bottom: 0,
+  right: 0,
+  left: 0,
 });
