@@ -6,7 +6,7 @@ import { useAtom } from "jotai";
 import { useMemo, useState } from "react";
 import { Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Input, Spacer, styled, Text, View, XStack } from "tamagui";
+import { H1, Input, Spacer, styled, View, XStack } from "tamagui";
 
 import { ActionSheet } from "@/components/ActionSheet";
 import {
@@ -72,7 +72,9 @@ export default function HomeScreen() {
     <StyledLinearGradient colors={["#0E1020", "#5C3A65"]}>
       <StyledSafeAreaView>
         <View flex={1} padding="$4" marginBottom={"$3"}>
-          <Text>My diary</Text>
+          <H1 color="white" size={"$9"}>
+            My diary
+          </H1>
           <Spacer scaleY={"$1"} />
           <Input
             placeholder="Search"
