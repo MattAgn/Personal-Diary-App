@@ -34,16 +34,26 @@ export const ActionSheet = ({
       />
       <Sheet.Handle />
       <Sheet.Frame
-        paddingBottom={bottom + 40}
-        paddingTop={"$4"}
-        paddingHorizontal={"$4"}
+        backgroundColor={"#51355B"}
+        paddingBottom={bottom + 10}
+        paddingTop={"$5"}
+        paddingHorizontal={"$5"}
         gap="$1"
-        width="100%"
       >
-        <Button icon={Pencil} onPress={onEdit}>
+        <Button
+          icon={Pencil}
+          onPress={onEdit}
+          marginBottom={"$3"}
+          backgroundColor={"#CDCDCD"}
+        >
           Edit
         </Button>
-        <Button icon={Trash} onPress={onDelete} color="red">
+        <Button
+          icon={Trash}
+          onPress={onDelete}
+          color="red"
+          backgroundColor={"#CDCDCD"}
+        >
           Delete
         </Button>
       </Sheet.Frame>
