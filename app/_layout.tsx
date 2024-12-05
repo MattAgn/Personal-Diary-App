@@ -41,6 +41,10 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen
+          name="settings"
+          options={{ presentation: "modal", headerShown: false }}
+        />
+        <Stack.Screen
           name="new-diary-entry"
           options={{
             presentation: "modal",

@@ -1,9 +1,7 @@
-import { Camera, Save } from "@tamagui/lucide-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import { Button, Image, Input, Spacer, XStack } from "tamagui";
+import { Image, Input, Spacer, XStack } from "tamagui";
 
 import type { Label } from "@/domain/DiaryEntry";
 import { allLabels } from "@/domain/DiaryEntry";
@@ -105,17 +103,6 @@ export const DiaryEntryForm = ({
           alignSelf="center"
         />
       )}
-      <Button onPress={pickImage} icon={Camera}>
-        Select photo
-      </Button>
-      <Button
-        icon={Save}
-        color={Colors["light"].tint}
-        margin="$4"
-        onPress={handleSubmit}
-      >
-        Save
-      </Button>
     </>
   );
 };
