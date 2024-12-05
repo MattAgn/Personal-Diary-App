@@ -20,33 +20,6 @@ import { tamaguiConfig } from "../tamagui.config";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 void SplashScreen.preventAutoHideAsync();
 
-export const ErrorBoundary = ({ error, retry }: ErrorBoundaryProps) => {
-  const [_, setDiaryEntries] = useAtom(diaryEntriesAtom);
-
-  const resetStorage = () => {
-    setDiaryEntries([]);
-    Alert.alert("Your diary has been reset");
-    void retry();
-  };
-
-  return (
-    <View
-      flex={1}
-      justifyContent="center"
-      alignItems="center"
-      backgroundColor={"red"}
-    >
-      <Text fontSize={"$7"}>Something went wrong</Text>
-      <Spacer scaleY={"$2"} />
-      <Text>{error.message}</Text>
-      <Spacer scaleY={"$2"} />
-      <Button onPress={retry}>Try Again?</Button>
-      <Spacer scaleY={"$2"} />
-      <Button onPress={resetStorage}>Empty storage and try again</Button>
-    </View>
-  );
-};
-
 export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -84,3 +57,30 @@ export default function RootLayout() {
     </TamaguiProvider>
   );
 }
+
+export const ErrorBoundary = ({ error, retry }: ErrorBoundaryProps) => {
+  const [_, setDiaryEntries] = useAtom(diaryEntriesAtom);
+
+  const resetStorage = () => {
+    setDiaryEntries([]);
+    Alert.alert("Your diary has been reset");
+    void retry();
+  };
+
+  return (
+    <View
+      flex={1}
+      justifyContent="center"
+      alignItems="center"
+      backgroundColor={"red"}
+    >
+      <Text fontSize={"$7"}>Something went wrong</Text>
+      <Spacer scaleY={"$2"} />
+      <Text>{error.message}</Text>
+      <Spacer scaleY={"$2"} />
+      <Button onPress={retry}>Try Again?</Button>
+      <Spacer scaleY={"$2"} />
+      <Button onPress={resetStorage}>Empty storage and try again</Button>
+    </View>
+  );
+};
