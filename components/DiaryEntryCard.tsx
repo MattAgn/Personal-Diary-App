@@ -1,6 +1,7 @@
 import { Ellipsis } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
-import { Button, Card, Spacer, Text } from "tamagui";
+import { Pressable } from "react-native";
+import { Card, Separator, Spacer, Text } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 
@@ -13,34 +14,52 @@ export const DiaryEntryCard = ({
 }) => {
   return (
     <Card
-      backgroundColor={"#3C3949"}
-      p="$3"
-      marginTop="$4"
+      backgroundColor={"#473D52"}
+      paddingHorizontal="$3"
+      marginTop="$5"
       key={diaryEntry.id}
       onPress={() => router.push(`/diary-entry/${diaryEntry.id}`)}
     >
-      <Card.Header flexDirection="row" justifyContent="space-between">
-        <Text color={"white"} fontSize={10}>
-          {diaryEntry.createdAt.toLocaleDateString()}
+      <Card.Header
+        justifyContent="flex-start"
+        paddingLeft={0}
+        paddingBottom={10}
+      >
+        <Text
+          color={"white"}
+          fontSize={"$5"}
+          textAlign="left"
+          fontWeight="bold"
+        >
+          {diaryEntry.title}
         </Text>
-        <Button
-          hitSlop={15}
-          icon={Ellipsis}
-          size={"$1"}
-          paddingHorizontal={"$3"}
-          borderRadius={"$3"}
-          backgroundColor={"$accentBackground"}
-          onPress={() => onActionButtonPress(diaryEntry.id)}
-        />
       </Card.Header>
-      <Text color={"white"} fontSize={"$5"}>
-        {diaryEntry.title}
-      </Text>
-      <Spacer scaleY={"$1"} />
+
       <Text color={"white"} numberOfLines={3}>
         {diaryEntry.content}
       </Text>
-      <Card.Footer></Card.Footer>
+      <Spacer scaleY={"$0.5"} />
+      <Separator borderColor={"#645A6D"} borderWidth={0.5} marginBottom={5} />
+      <Card.Footer
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
+        paddingBottom={5}
+      >
+        <Text color={"#ABA7B6"} fontSize={12} alignSelf="center">
+          {diaryEntry.createdAt.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </Text>
+        <Pressable
+          hitSlop={15}
+          onPress={() => onActionButtonPress(diaryEntry.id)}
+        >
+          <Ellipsis size={"$2"} color={"#ABA7B6"} />
+        </Pressable>
+      </Card.Footer>
     </Card>
   );
 };
