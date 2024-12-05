@@ -1,4 +1,4 @@
-import { shareAsync } from "expo-sharing";
+import { isAvailableAsync, shareAsync } from "expo-sharing";
 import { Alert } from "react-native";
 import RNHTMLtoPDF from "react-native-html-to-pdf";
 
@@ -42,13 +42,16 @@ export const shareDiaryEntriesPdf = async (diaryEntries: DiaryEntry[]) => {
     const html = generateDiaryEntriesHtml(diaryEntries);
     const options = {
       html,
-      fileName: "diary.pdf",
+      fileName: "diary",
     };
 
     const file = await RNHTMLtoPDF.convert(options);
 
     if (!file.filePath) {
       throw new Error("Failed to generate PDF file, filePath is not defined");
+    }
+    if (!(await isAvailableAsync())) {
+      throw new Error("Sharing is not available");
     }
 
     await shareAsync(`file://${file.filePath}`, {
