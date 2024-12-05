@@ -70,7 +70,7 @@ export default function HomeScreen() {
 
   return (
     <StyledLinearGradient colors={["#0E1020", "#5C3A65"]}>
-      <StyledSafeAreaView>
+      <StyledSafeAreaView edges={["top"]}>
         <View flex={1} padding="$4" marginBottom={"$3"}>
           <H1 color="white" size={"$9"}>
             My diary
@@ -92,8 +92,6 @@ export default function HomeScreen() {
               )
             }
           />
-          <Spacer scaleY={"$2"} />
-          <Spacer scaleY={1} />
           <BottomButtonContainer>
             <RoundIconButton
               onPress={() => router.push("/new-diary-entry")}
@@ -125,7 +123,8 @@ const StyledLinearGradient = styled(LinearGradient, {
 const BottomButtonContainer = styled(XStack, {
   justifyContent: "center",
   position: "absolute",
-  bottom: 0,
+  bottom: 15,
   right: 0,
   left: 0,
+  zIndex: 2,
 });
