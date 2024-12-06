@@ -16,7 +16,7 @@ type MediaWithFullScreenDisplayProps = {
 export const MediaWithFullScreenDisplay = ({
   media,
 }: MediaWithFullScreenDisplayProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isImageFullscreen, setIsImageFullscreen] = useState(false);
   const { width: screenWidth, height: screenHeight } = useSafeAreaFrame();
   const isImage = media.type === "image" || media.type === "livePhoto";
 
@@ -41,18 +41,18 @@ export const MediaWithFullScreenDisplay = ({
 
   return (
     <>
-      <Pressable onPress={() => setIsExpanded(true)}>
+      <Pressable onPress={() => setIsImageFullscreen(true)}>
         <StyledInlineImage source={{ uri: media.uri }} />
         <Spacer scaleY={"$2"} />
       </Pressable>
-      {isExpanded && (
+      {isImageFullscreen && (
         <Overlay
           width={screenWidth}
           height={screenHeight}
           paddingBottom={BUTTONS_BOTTOM_BAR_HEIGHT}
         >
           <FullScreenImage source={{ uri: media.uri }} />
-          <CloseButton icon={X} onPress={() => setIsExpanded(false)} />
+          <CloseButton icon={X} onPress={() => setIsImageFullscreen(false)} />
         </Overlay>
       )}
     </>
