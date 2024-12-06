@@ -29,6 +29,17 @@ export const DiaryEntryForm = ({
 }: DiaryEntryFormProps) => {
   return (
     <>
+      {media ? (
+        <Image
+          source={{ uri: media }}
+          borderRadius={"$4"}
+          width={"100%"}
+          paddingHorizontal="$2"
+          marginBottom="$5"
+          height={200}
+          alignSelf="center"
+        />
+      ) : null}
       <Input
         placeholder="Title"
         value={title}
@@ -62,14 +73,6 @@ export const DiaryEntryForm = ({
         ))}
       </XStack>
       <Spacer scaleY={2} />
-      {media && (
-        <Image
-          source={{ uri: media }}
-          width={200}
-          height={200}
-          alignSelf="center"
-        />
-      )}
     </>
   );
 };

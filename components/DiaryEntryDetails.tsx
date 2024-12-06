@@ -11,6 +11,17 @@ type DiaryEntryDetailsProps = {
 export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
   return (
     <>
+      {diaryEntry.media ? (
+        <Image
+          source={{ uri: diaryEntry.media }}
+          borderRadius={"$4"}
+          width={"100%"}
+          paddingHorizontal="$2"
+          marginBottom="$5"
+          height={200}
+          alignSelf="center"
+        />
+      ) : null}
       <Text fontWeight="bold" fontSize={"$7"} color="white">
         {diaryEntry.title}
       </Text>
@@ -25,14 +36,6 @@ export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
         {diaryEntry.content}
       </Text>
       <Spacer scaleY={1} />
-      {diaryEntry.media && (
-        <Image
-          source={{ uri: diaryEntry.media }}
-          width={200}
-          height={200}
-          alignSelf="center"
-        />
-      )}
     </>
   );
 };
