@@ -1,6 +1,6 @@
 import { PlayCircle, X } from "@tamagui/lucide-icons";
 import { ResizeMode, Video } from "expo-av";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import { Button, Image, Spacer, styled, View, YStack } from "tamagui";
 
@@ -20,22 +20,13 @@ export const MediaWithFullScreenDisplay = ({
   const { width: screenWidth, height: screenHeight } = useSafeAreaFrame();
   const isImage = media.type === "image" || media.type === "livePhoto";
 
-  const videoRef = useRef<Video>(null);
-
   if (!isImage) {
     return (
-      <PressableWithFeedback
-        onPress={() => void videoRef.current?.presentFullscreenPlayer()}
-      >
-        <StyledInlineVideo
-          source={{ uri: media.uri }}
-          resizeMode={ResizeMode.CONTAIN}
-          ref={videoRef}
-        />
-        <VideoOverlay>
-          <PlayCircleIcon />
-        </VideoOverlay>
-      </PressableWithFeedback>
+      <StyledInlineVideo
+        source={{ uri: media.uri }}
+        resizeMode={ResizeMode.CONTAIN}
+        useNativeControls
+      />
     );
   }
 
@@ -71,8 +62,6 @@ const StyledInlineImage = styled(Image, {
 const StyledInlineVideo = styled(Video, {
   width: "100%",
   height: MEDIA_HEIGHT,
-  paddingHorizontal: "$2",
-  borderRadius: "$4",
 });
 
 const Overlay = styled(YStack, {
