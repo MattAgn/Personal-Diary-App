@@ -71,22 +71,17 @@ export default function HomeScreen() {
   return (
     <StyledLinearGradient colors={["#0E1020", "#5C3A65"]}>
       <StyledSafeAreaView edges={["top"]}>
-        <View flex={1} padding="$4" marginBottom={"$3"}>
-          <XStack
-            justifyContent="space-between"
-            alignItems="center"
-            paddingRight={"$2"}
-          >
-            <H1 color="white" size={"$9"}>
-              My diary
-            </H1>
+        <MainContainer>
+          <HeaderRowContainer>
+            <HeaderTitle>My diary</HeaderTitle>
             <IconButton
+              size={30}
               onPress={() => router.push("/settings")}
               transparent
-              icon={Settings}
-              size={50}
-            />
-          </XStack>
+            >
+              <Settings color={"white"} />
+            </IconButton>
+          </HeaderRowContainer>
           <Spacer scaleY={"$1"} />
           <Input
             placeholder="Search"
@@ -113,7 +108,7 @@ export default function HomeScreen() {
               withShadow
             />
           </BottomButtonContainer>
-        </View>
+        </MainContainer>
         <ActionSheet
           isSheetOpen={isSheetOpen}
           setIsSheetOpen={setIsSheetOpen}
@@ -140,4 +135,21 @@ const BottomButtonContainer = styled(XStack, {
   right: 0,
   left: 0,
   zIndex: 2,
+});
+
+const HeaderTitle = styled(H1, {
+  color: "white",
+  size: "$9",
+});
+
+const HeaderRowContainer = styled(XStack, {
+  justifyContent: "space-between",
+  alignItems: "center",
+  paddingRight: "$2",
+});
+
+const MainContainer = styled(View, {
+  flex: 1,
+  padding: "$4",
+  marginBottom: "$3",
 });

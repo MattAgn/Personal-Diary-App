@@ -41,11 +41,7 @@ export default function SettingsScreen() {
   };
 
   return (
-    <StyledSafeAreaView
-      paddingTop="$6"
-      paddingHorizontal="$4"
-      backgroundColor="#30213E"
-    >
+    <StyledSafeAreaView>
       <H1 color="white" size={"$9"}>
         Settings
       </H1>
@@ -67,5 +63,7 @@ export default function SettingsScreen() {
 
 const StyledSafeAreaView = styled(SafeAreaView, {
   flex: 1,
-  paddingHorizontal: 16,
+  paddingTop: "$6",
+  paddingHorizontal: "$4",
+  backgroundColor: "#30213E",
 });

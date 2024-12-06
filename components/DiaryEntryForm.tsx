@@ -1,4 +1,4 @@
-import { Input, Spacer, XStack } from "tamagui";
+import { Input, Spacer, styled, XStack } from "tamagui";
 
 import type { Label, Media } from "@/domain/DiaryEntry";
 import { allLabels } from "@/domain/DiaryEntry";
@@ -37,7 +37,7 @@ export const DiaryEntryForm = ({
         </>
       ) : null}
 
-      <XStack gap={"$2"} flexWrap="wrap" marginBottom="$4">
+      <LabelsRow>
         {allLabels.map((label) => (
           <LabelButton
             key={label}
@@ -46,29 +46,35 @@ export const DiaryEntryForm = ({
             toggleLabel={() => toggleLabel(label)}
           />
         ))}
-      </XStack>
+      </LabelsRow>
 
-      <Input
+      <TransparentInput
         placeholder="Title"
         value={title}
-        color="white"
         fontSize={"$6"}
         onChangeText={setTitle}
-        backgroundColor={"$colorTransparent"}
-        borderColor={"$colorTransparent"}
       />
       <Spacer scaleY={"$0.25"} />
-      <Input
+      <TransparentInput
         placeholder="What's on your mind?"
         multiline
-        size={"$5"}
+        fontSize={"$5"}
         numberOfLines={7}
-        backgroundColor={"$colorTransparent"}
-        color="white"
-        borderColor={"$colorTransparent"}
         value={content}
         onChangeText={setContent}
       />
     </>
   );
 };
+
+const TransparentInput = styled(Input, {
+  backgroundColor: "$colorTransparent",
+  borderColor: "$colorTransparent",
+  color: "white",
+});
+
+const LabelsRow = styled(XStack, {
+  gap: "$2",
+  flexWrap: "wrap",
+  marginBottom: "$4",
+});
