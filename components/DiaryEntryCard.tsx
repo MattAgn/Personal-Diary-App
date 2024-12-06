@@ -1,7 +1,7 @@
 import { Ellipsis } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { Pressable } from "react-native";
-import { Card, Separator, Spacer, Text } from "tamagui";
+import { Card, Image, Separator, Spacer, Text } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 
@@ -22,9 +22,20 @@ export const DiaryEntryCard = ({
     >
       <Card.Header
         justifyContent="flex-start"
-        paddingLeft={0}
-        paddingBottom={10}
+        paddingHorizontal={0}
+        paddingTop={"$2.5"}
+        paddingBottom={"$2"}
       >
+        {diaryEntry.media ? (
+          <Image
+            source={{ uri: diaryEntry.media }}
+            borderRadius={"$4"}
+            width={"100%"}
+            height={150}
+            marginBottom="$3"
+            alignSelf="center"
+          />
+        ) : null}
         <Text
           color={"white"}
           fontSize={"$5"}
