@@ -81,12 +81,11 @@ export default function HomeScreen() {
               My diary
             </H1>
             <IconButton
-              size={30}
               onPress={() => router.push("/settings")}
               transparent
-            >
-              <Settings color={"white"} />
-            </IconButton>
+              icon={Settings}
+              size={50}
+            />
           </XStack>
           <Spacer scaleY={"$1"} />
           <Input
