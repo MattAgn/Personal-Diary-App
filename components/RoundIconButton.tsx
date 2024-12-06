@@ -1,5 +1,7 @@
 import type { PressableProps, ViewStyle } from "react-native";
-import { Pressable, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+
+import { PressableWithFeedback } from "./PressableWithFeedback";
 
 const BUTTON_SIZE = 80;
 
@@ -15,7 +17,7 @@ export const RoundIconButton = ({
   ...props
 }: RoundIconButtonProps) => {
   return (
-    <Pressable
+    <PressableWithFeedback
       style={[
         styles.button,
         { height: size, width: size, borderRadius: size / 2 },
@@ -24,7 +26,7 @@ export const RoundIconButton = ({
       {...props}
     >
       {children}
-    </Pressable>
+    </PressableWithFeedback>
   );
 };
 

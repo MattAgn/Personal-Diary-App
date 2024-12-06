@@ -1,13 +1,13 @@
 import { PlayCircle, X } from "@tamagui/lucide-icons";
 import { ResizeMode, Video } from "expo-av";
 import { useRef, useState } from "react";
-import { Pressable } from "react-native";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import { Button, Image, Spacer, styled, View, YStack } from "tamagui";
 
 import type { Media } from "@/domain/DiaryEntry";
 
 import { BUTTONS_BOTTOM_BAR_HEIGHT } from "./DiaryEntryModalLayout";
+import { PressableWithFeedback } from "./PressableWithFeedback";
 
 type MediaWithFullScreenDisplayProps = {
   media: Media;
@@ -24,7 +24,7 @@ export const MediaWithFullScreenDisplay = ({
 
   if (!isImage) {
     return (
-      <Pressable
+      <PressableWithFeedback
         onPress={() => void videoRef.current?.presentFullscreenPlayer()}
       >
         <StyledInlineVideo
@@ -35,16 +35,16 @@ export const MediaWithFullScreenDisplay = ({
         <VideoOverlay>
           <PlayCircleIcon />
         </VideoOverlay>
-      </Pressable>
+      </PressableWithFeedback>
     );
   }
 
   return (
     <>
-      <Pressable onPress={() => setIsImageFullscreen(true)}>
+      <PressableWithFeedback onPress={() => setIsImageFullscreen(true)}>
         <StyledInlineImage source={{ uri: media.uri }} />
         <Spacer scaleY={"$2"} />
-      </Pressable>
+      </PressableWithFeedback>
       {isImageFullscreen && (
         <Overlay
           width={screenWidth}
