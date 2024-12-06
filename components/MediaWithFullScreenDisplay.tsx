@@ -1,15 +1,18 @@
 import { X } from "@tamagui/lucide-icons";
+import { ResizeMode, Video } from "expo-av";
 import { useState } from "react";
 import { Pressable } from "react-native";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import { Button, Image, YStack } from "tamagui";
 
+import type { Media } from "@/domain/DiaryEntry";
+
 type MediaWithFullScreenDisplayProps = {
-  mediaUri: string;
+  media: Media;
 };
 
 export const MediaWithFullScreenDisplay = ({
-  mediaUri,
+  media,
 }: MediaWithFullScreenDisplayProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { width: screenWidth, height: screenHeight } = useSafeAreaFrame();
@@ -18,7 +21,7 @@ export const MediaWithFullScreenDisplay = ({
     <>
       <Pressable onPress={() => setIsExpanded(true)}>
         <Image
-          source={{ uri: mediaUri }}
+          source={{ uri: media.uri }}
           borderRadius={"$4"}
           width={"100%"}
           paddingHorizontal="$2"
@@ -40,12 +43,20 @@ export const MediaWithFullScreenDisplay = ({
           alignItems="center"
           paddingBottom="90"
         >
-          <Image
-            source={{ uri: mediaUri }}
-            width="100%"
-            height="100%"
-            objectFit="contain"
-          />
+          {media.type === "image" ? (
+            <Image
+              source={{ uri: media.uri }}
+              width="100%"
+              height="100%"
+              objectFit="contain"
+            />
+          ) : (
+            <Video
+              source={{ uri: media.uri }}
+              style={{ width: "100%", height: "100%" }}
+              resizeMode={ResizeMode.CONTAIN}
+            />
+          )}
           <Button
             position="absolute"
             top="$5"

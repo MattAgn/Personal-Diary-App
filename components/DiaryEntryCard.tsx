@@ -28,7 +28,7 @@ export const DiaryEntryCard = ({
       >
         {diaryEntry.media ? (
           <Image
-            source={{ uri: diaryEntry.media }}
+            source={{ uri: diaryEntry.media.uri }}
             borderRadius={"$4"}
             width={"100%"}
             height={150}
