@@ -3,10 +3,11 @@ import { Camera, Check, PencilLine, Trash } from "@tamagui/lucide-icons";
 import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { useAtom } from "jotai";
 import { Alert } from "react-native";
-import { Button, XStack } from "tamagui";
+import { XStack } from "tamagui";
 
 import { DiaryEntryDetails } from "@/components/DiaryEntryDetails";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
+import { IconButton } from "@/components/IconButton";
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
 import {
@@ -77,26 +78,17 @@ export default function DiaryEntry() {
         mainContent={<DiaryEntryForm {...formActions} {...formData} />}
         bottomActions={
           <>
-            <Button
+            <IconButton
               onPress={formActions.pickImage}
               icon={Camera}
-              color={"white"}
-              backgroundColor={"$colorTransparent"}
-              size={"$8"}
+              transparent
             />
-            <Button
-              onPress={saveEdits}
-              icon={Check}
-              color={"white"}
-              backgroundColor={"$colorTransparent"}
-              size={"$8"}
-            />
-            <Button
+            <IconButton onPress={saveEdits} icon={Check} transparent />
+            <IconButton
               onPress={() => showDeleteAlert()}
-              color={"red"}
-              backgroundColor={"$colorTransparent"}
               icon={Trash}
-              size={"$8"}
+              destructive
+              transparent
             />
           </>
         }
@@ -110,19 +102,16 @@ export default function DiaryEntry() {
       mainContent={<DiaryEntryDetails diaryEntry={entry} />}
       bottomActions={
         <XStack justifyContent="space-around">
-          <Button
+          <IconButton
             onPress={() => setIsEditing(true)}
             icon={PencilLine}
-            size={"$8"}
-            color={"white"}
-            backgroundColor={"$colorTransparent"}
+            transparent
           />
-          <Button
+          <IconButton
             onPress={() => showDeleteAlert()}
             icon={Trash}
-            size={"$8"}
-            color={"red"}
-            backgroundColor={"$colorTransparent"}
+            destructive
+            transparent
           />
         </XStack>
       }

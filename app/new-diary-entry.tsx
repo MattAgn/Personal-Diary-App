@@ -3,10 +3,10 @@ import { Camera, Check, X } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { Alert } from "react-native";
-import { Button } from "tamagui";
 import { v6 as uuidv6 } from "uuid";
 
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
+import { IconButton } from "@/components/IconButton";
 import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
@@ -52,27 +52,13 @@ export default function NewDiaryEntry() {
       mainContent={<DiaryEntryForm {...formActions} {...formData} />}
       bottomActions={
         <>
-          <Button
+          <IconButton
+            transparent
             onPress={formActions.pickImage}
             icon={Camera}
-            color={"white"}
-            backgroundColor={"$colorTransparent"}
-            size={"$8"}
           />
-          <Button
-            onPress={handleSubmit}
-            icon={Check}
-            color={"white"}
-            backgroundColor={"$colorTransparent"}
-            size={"$8"}
-          />
-          <Button
-            onPress={handleCancel}
-            color={"white"}
-            backgroundColor={"$colorTransparent"}
-            icon={X}
-            size={"$8"}
-          />
+          <IconButton transparent onPress={handleSubmit} icon={Check} />
+          <IconButton transparent onPress={handleCancel} icon={X} />
         </>
       }
     />

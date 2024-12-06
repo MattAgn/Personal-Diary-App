@@ -14,7 +14,7 @@ import {
   DiaryEntriesNoSearchResult,
   DiaryNoEntriesYet,
 } from "@/components/DiaryEntriesList";
-import { RoundIconButton } from "@/components/RoundIconButton";
+import { IconButton } from "@/components/IconButton";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
 export default function HomeScreen() {
@@ -80,13 +80,13 @@ export default function HomeScreen() {
             <H1 color="white" size={"$9"}>
               My diary
             </H1>
-            <RoundIconButton
+            <IconButton
               size={30}
-              style={{ backgroundColor: "transparent" }}
               onPress={() => router.push("/settings")}
+              transparent
             >
               <Settings color={"white"} />
-            </RoundIconButton>
+            </IconButton>
           </XStack>
           <Spacer scaleY={"$1"} />
           <Input
@@ -106,12 +106,13 @@ export default function HomeScreen() {
             }
           />
           <BottomButtonContainer>
-            <RoundIconButton
+            <IconButton
               onPress={() => router.push("/new-diary-entry")}
-              style={{ alignSelf: "center" }}
-            >
-              <Plus color={"white"} />
-            </RoundIconButton>
+              alignSelf="center"
+              icon={Plus}
+              backgroundColor="#5E5CE5"
+              withShadow
+            />
           </BottomButtonContainer>
         </View>
         <ActionSheet
