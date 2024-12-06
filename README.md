@@ -55,7 +55,11 @@ This is a small diary app built with Expo and Tamagui made for a technical inter
 
 Video of the app in on iOS simulator:
 
-<video src="./screenshots/ios-demo.mp4" width="220" height="440" controls></video>
+https://github.com/user-attachments/assets/8c77b64d-ef96-4aba-bc2b-5fd910614a3e
+
+https://github.com/user-attachments/assets/85959f39-785c-40cb-9412-cf127723d7de
+
+https://github.com/user-attachments/assets/46fd4425-bdd6-41b1-aeca-c7f1a5aec885
 
 | Page             | iOS                                               | Android                                                   |
 | ---------------- | ------------------------------------------------- | --------------------------------------------------------- |
