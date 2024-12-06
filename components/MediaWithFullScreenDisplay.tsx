@@ -7,6 +7,8 @@ import { Button, Image, YStack } from "tamagui";
 
 import type { Media } from "@/domain/DiaryEntry";
 
+import { BUTTONS_BOTTOM_BAR_HEIGHT } from "./DiaryEntryModalLayout";
+
 type MediaWithFullScreenDisplayProps = {
   media: Media;
 };
@@ -41,7 +43,7 @@ export const MediaWithFullScreenDisplay = ({
           backgroundColor="rgba(0,0,0,0.9)"
           justifyContent="center"
           alignItems="center"
-          paddingBottom="90"
+          paddingBottom={BUTTONS_BOTTOM_BAR_HEIGHT}
         >
           {media.type === "image" ? (
             <Image

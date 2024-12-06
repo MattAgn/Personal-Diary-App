@@ -18,7 +18,7 @@ type DiaryEntryModalLayoutProps = {
   bottomActions: React.ReactNode;
 };
 
-const BUTTONS_BOTTOM_BAR_HEIGHT = 85;
+export const BUTTONS_BOTTOM_BAR_HEIGHT = 85;
 
 export function DiaryEntryModalLayout({
   title,
