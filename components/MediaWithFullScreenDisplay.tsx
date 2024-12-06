@@ -1,8 +1,8 @@
-import { PlayCircle, X } from "@tamagui/lucide-icons";
+import { X } from "@tamagui/lucide-icons";
 import { ResizeMode, Video } from "expo-av";
 import { useState } from "react";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
-import { Button, Image, Spacer, styled, View, YStack } from "tamagui";
+import { Button, Image, Spacer, styled, YStack } from "tamagui";
 
 import type { Media } from "@/domain/DiaryEntry";
 
@@ -74,17 +74,6 @@ const Overlay = styled(YStack, {
   alignItems: "center",
 });
 
-const VideoOverlay = styled(View, {
-  position: "absolute",
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-  justifyContent: "center",
-  alignItems: "center",
-  backgroundColor: "rgba(0,0,0,0.2)",
-});
-
 const CloseButton = styled(Button, {
   position: "absolute",
   top: "$5",
@@ -99,11 +88,4 @@ const FullScreenImage = styled(Image, {
   width: "100%",
   height: "100%",
   objectFit: "contain",
-});
-
-const PlayCircleIcon = styled(PlayCircle, {
-  color: "white",
-  backgroundColor: "black",
-  size: 50,
-  borderRadius: 25,
 });
