@@ -39,6 +39,7 @@ This is a small diary app built with Expo and Tamagui made for a technical inter
 - [x] Add labels to a diary entry.
 - [x] Filter diary entries by content or title.
 - [x] Add an image to a diary entry.
+- [ ] Add a video to a diary entry and play it.
 - [ ] Add audio notes (TODO)
 - [ ] Add icon & splash screen (TODO)
 - [ ] Add animations (TODO)
