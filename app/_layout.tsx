@@ -48,12 +48,14 @@ export default function RootLayout() {
           name="new-diary-entry"
           options={{
             presentation: "modal",
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="diary-entry/[id]"
           options={{
             presentation: "modal",
+            headerShown: false,
           }}
         />
       </Stack>

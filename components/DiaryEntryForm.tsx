@@ -73,8 +73,28 @@ export const DiaryEntryForm = ({
 
   return (
     <>
-      <Input placeholder="Title" value={title} onChangeText={setTitle} />
-      <Spacer scaleY={"$1"} />
+      <Input
+        placeholder="Title"
+        value={title}
+        color="white"
+        fontSize={"$6"}
+        onChangeText={setTitle}
+        backgroundColor={"$colorTransparent"}
+        borderColor={"$colorTransparent"}
+      />
+      <Spacer scaleY={"$0.25"} />
+      <Input
+        placeholder="What's on your mind?"
+        multiline
+        size={"$5"}
+        numberOfLines={7}
+        backgroundColor={"$colorTransparent"}
+        color="white"
+        borderColor={"$colorTransparent"}
+        value={content}
+        onChangeText={setContent}
+      />
+      <Spacer scaleY={2} />
       <XStack gap={"$2"} flexWrap="wrap">
         {allLabels.map((label) => (
           <LabelButton
@@ -85,15 +105,6 @@ export const DiaryEntryForm = ({
           />
         ))}
       </XStack>
-      <Spacer scaleY={"$1"} />
-      <Input
-        placeholder="What's on your mind?"
-        multiline
-        numberOfLines={5}
-        backgroundColor={"$colorTransparent"}
-        value={content}
-        onChangeText={setContent}
-      />
       <Spacer scaleY={2} />
       {media && (
         <Image

@@ -11,7 +11,7 @@ type DiaryEntryDetailsProps = {
 export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
   return (
     <>
-      <Text fontWeight="bold" fontSize={"$5"}>
+      <Text fontWeight="bold" fontSize={"$7"} color="white">
         {diaryEntry.title}
       </Text>
       <Spacer scaleY={1} />
@@ -21,7 +21,9 @@ export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
         ))}
       </XStack>
       <Spacer scaleY={1} />
-      <Text>{diaryEntry.content}</Text>
+      <Text color="white" fontSize={"$5"}>
+        {diaryEntry.content}
+      </Text>
       <Spacer scaleY={1} />
       {diaryEntry.media && (
         <Image
