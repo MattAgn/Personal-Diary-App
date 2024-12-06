@@ -1,7 +1,6 @@
 import { Image, Input, Spacer, XStack } from "tamagui";
 
-import type { Label } from "@/domain/DiaryEntry";
-import { allLabels } from "@/domain/DiaryEntry";
+import { allLabels, type Label } from "@/domain/DiaryEntry";
 
 import { LabelButton } from "./LabelButton";
 
@@ -40,6 +39,18 @@ export const DiaryEntryForm = ({
           alignSelf="center"
         />
       ) : null}
+
+      <XStack gap={"$2"} flexWrap="wrap" marginBottom="$4">
+        {allLabels.map((label) => (
+          <LabelButton
+            key={label}
+            isActive={labels.includes(label)}
+            label={label}
+            toggleLabel={() => toggleLabel(label)}
+          />
+        ))}
+      </XStack>
+
       <Input
         placeholder="Title"
         value={title}
@@ -61,18 +72,6 @@ export const DiaryEntryForm = ({
         value={content}
         onChangeText={setContent}
       />
-      <Spacer scaleY={2} />
-      <XStack gap={"$2"} flexWrap="wrap">
-        {allLabels.map((label) => (
-          <LabelButton
-            key={label}
-            isActive={labels.includes(label)}
-            label={label}
-            toggleLabel={() => toggleLabel(label)}
-          />
-        ))}
-      </XStack>
-      <Spacer scaleY={2} />
     </>
   );
 };
