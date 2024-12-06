@@ -21,18 +21,13 @@ This is a small diary app built with Expo and Tamagui made for a technical inter
 
    These commands will build the native app for Android and iOS. Run it every time you add a new native dependency or when you want to install the app on a new device.
 
-3. Start metro
+3. Start the app by launching the Metro bundler
 
    ```bash
    npm start
    ```
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+> Warning: This app does not work on with Expo GO, step 2 is required.
 
 ## Features
 
