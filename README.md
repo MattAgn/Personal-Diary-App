@@ -51,7 +51,11 @@ This is a small diary app built with Expo and Tamagui made for a technical inter
 - [ ] Fix bug when keyboard is open
 - [ ] Display modals properly on android
 
-## Screenshots
+## Screenshots & videos
+
+Video of the app in on iOS simulator:
+
+<video src="./screenshots/ios-demo.mp4" width="220" height="440" controls></video>
 
 | Page             | iOS                                               | Android                                                   |
 | ---------------- | ------------------------------------------------- | --------------------------------------------------------- |
