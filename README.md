@@ -47,6 +47,7 @@ This is a small diary app built with Expo and Tamagui made for a technical inter
 
 - [ ] Use tamagui theme properly for colors
 - [ ] Fix bug when keyboard is open
+- [ ] Display modals properly on android
 
 ## Screenshots
 
