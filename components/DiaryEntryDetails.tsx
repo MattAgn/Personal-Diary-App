@@ -1,8 +1,9 @@
-import { Image, Spacer, Text, XStack } from "tamagui";
+import { Spacer, Text, XStack } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 
 import { LabelPill } from "./LabelPill";
+import { MediaWithFullScreenDisplay } from "./MediaWithFullScreenDisplay";
 
 type DiaryEntryDetailsProps = {
   diaryEntry: DiaryEntry;
@@ -12,15 +13,7 @@ export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
   return (
     <>
       {diaryEntry.media ? (
-        <Image
-          source={{ uri: diaryEntry.media }}
-          borderRadius={"$4"}
-          width={"100%"}
-          paddingHorizontal="$2"
-          marginBottom="$5"
-          height={200}
-          alignSelf="center"
-        />
+        <MediaWithFullScreenDisplay mediaUri={diaryEntry.media} />
       ) : null}
 
       {diaryEntry.labels.length > 0 && (

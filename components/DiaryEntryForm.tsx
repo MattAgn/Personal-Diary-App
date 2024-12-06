@@ -1,8 +1,9 @@
-import { Image, Input, Spacer, XStack } from "tamagui";
+import { Input, Spacer, XStack } from "tamagui";
 
 import { allLabels, type Label } from "@/domain/DiaryEntry";
 
 import { LabelButton } from "./LabelButton";
+import { MediaWithFullScreenDisplay } from "./MediaWithFullScreenDisplay";
 
 export type DiaryEntryFormData = {
   title: string;
@@ -28,17 +29,7 @@ export const DiaryEntryForm = ({
 }: DiaryEntryFormProps) => {
   return (
     <>
-      {media ? (
-        <Image
-          source={{ uri: media }}
-          borderRadius={"$4"}
-          width={"100%"}
-          paddingHorizontal="$2"
-          marginBottom="$5"
-          height={200}
-          alignSelf="center"
-        />
-      ) : null}
+      {media ? <MediaWithFullScreenDisplay mediaUri={media} /> : null}
 
       <XStack gap={"$2"} flexWrap="wrap" marginBottom="$4">
         {allLabels.map((label) => (
