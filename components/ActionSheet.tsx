@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { Pencil, Trash } from "@tamagui/lucide-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Button, Sheet } from "tamagui";
+import { Button, Sheet, styled } from "tamagui";
 
 type Props = {
   isSheetOpen: boolean;
@@ -27,36 +27,39 @@ export const ActionSheet = ({
       dismissOnOverlayPress
       animation="medium"
     >
-      <Sheet.Overlay
-        animation="medium"
-        enterStyle={{ opacity: 0 }}
-        exitStyle={{ opacity: 0 }}
-      />
+      <SheetOverlay />
       <Sheet.Handle />
-      <Sheet.Frame
-        backgroundColor={"#51355B"}
-        paddingBottom={bottom + 10}
-        paddingTop={"$5"}
-        paddingHorizontal={"$5"}
-        gap="$1"
-      >
-        <Button
-          icon={Pencil}
-          onPress={onEdit}
-          marginBottom={"$3"}
-          backgroundColor={"#CDCDCD"}
-        >
+      <SheetFrame paddingBottom={bottom + 10}>
+        <EditButton icon={Pencil} onPress={onEdit}>
           Edit
-        </Button>
-        <Button
-          icon={Trash}
-          onPress={onDelete}
-          color="red"
-          backgroundColor={"#CDCDCD"}
-        >
+        </EditButton>
+        <DeleteButton icon={Trash} onPress={onDelete}>
           Delete
-        </Button>
-      </Sheet.Frame>
+        </DeleteButton>
+      </SheetFrame>
     </Sheet>
   );
 };
+
+const SheetOverlay = styled(Sheet.Overlay, {
+  animation: "medium",
+  enterStyle: { opacity: 0 },
+  exitStyle: { opacity: 0 },
+});
+
+const SheetFrame = styled(Sheet.Frame, {
+  backgroundColor: "#51355B",
+  paddingTop: "$5",
+  paddingHorizontal: "$5",
+  gap: "$1",
+});
+
+const EditButton = styled(Button, {
+  marginBottom: "$3",
+  backgroundColor: "#CDCDCD",
+});
+
+const DeleteButton = styled(Button, {
+  color: "red",
+  backgroundColor: "#CDCDCD",
+});
