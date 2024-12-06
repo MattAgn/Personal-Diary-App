@@ -2,7 +2,7 @@
 import { Camera, Check, X } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import { Alert, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Button,
@@ -16,27 +16,38 @@ import {
 } from "tamagui";
 import { v6 as uuidv6 } from "uuid";
 
-import type { DiaryEntryFormData } from "@/components/DiaryEntryForm";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
+import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
 const BOTTONS_BOTTOM_BAR_HEIGHT = 85;
 
 export default function NewDiaryEntry() {
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
-
+  const { formData, formActions } = useDiaryEntryForm();
   const createdAt = new Date();
-  const handleSubmit = (data: DiaryEntryFormData) => {
+
+  const handleSubmit = () => {
     setDiaryEntries([
       ...diaryEntries,
       {
         id: uuidv6(),
         createdAt,
-        ...data,
-        media: data.media,
+        ...formData,
       },
     ]);
     router.back();
+  };
+
+  const handleCancel = () => {
+    Alert.alert(
+      "Cancel",
+      "Are you sure you want to erase this entry? Your changes will not be saved.",
+      [
+        { text: "Cancel", style: "cancel" },
+        { text: "Yes", onPress: () => router.back() },
+      ],
+    );
   };
 
   const formattedDate = createdAt.toLocaleDateString("en-US", {
@@ -63,7 +74,7 @@ export default function NewDiaryEntry() {
 
               <Spacer scaleY={"$2"} />
 
-              <DiaryEntryForm onSubmit={handleSubmit} />
+              <DiaryEntryForm {...formActions} {...formData} />
 
               <Spacer scaleY={"$2"} />
             </View>
@@ -75,21 +86,21 @@ export default function NewDiaryEntry() {
             marginBottom={0}
           >
             <Button
-              onPress={() => {}}
+              onPress={formActions.pickImage}
               icon={Camera}
               color={"white"}
               backgroundColor={"$colorTransparent"}
               size={"$8"}
             />
             <Button
-              onPress={() => {}}
+              onPress={handleSubmit}
               icon={Check}
               color={"white"}
               backgroundColor={"$colorTransparent"}
               size={"$8"}
             />
             <Button
-              onPress={() => {}}
+              onPress={handleCancel}
               color={"white"}
               backgroundColor={"$colorTransparent"}
               icon={X}

@@ -1,6 +1,3 @@
-import * as ImagePicker from "expo-image-picker";
-import { useState } from "react";
-import { Alert } from "react-native";
 import { Image, Input, Spacer, XStack } from "tamagui";
 
 import type { Label } from "@/domain/DiaryEntry";
@@ -16,61 +13,20 @@ export type DiaryEntryFormData = {
 };
 
 type DiaryEntryFormProps = {
-  initialTitle?: string;
-  initialContent?: string;
-  initialMedia?: string | null;
-  initialLabels?: Label[];
-  onSubmit: (data: DiaryEntryFormData) => void;
-};
+  setTitle: (title: string) => void;
+  setContent: (content: string) => void;
+  toggleLabel: (label: Label) => void;
+} & DiaryEntryFormData;
 
 export const DiaryEntryForm = ({
-  initialTitle = "",
-  initialContent = "",
-  initialMedia = null,
-  initialLabels = [],
-  onSubmit,
+  title,
+  setTitle,
+  content,
+  setContent,
+  media,
+  labels,
+  toggleLabel,
 }: DiaryEntryFormProps) => {
-  const [title, setTitle] = useState(initialTitle);
-  const [content, setContent] = useState(initialContent);
-  const [media, setMedia] = useState<string | null>(initialMedia);
-  const [labels, setLabels] = useState<Label[]>(initialLabels);
-
-  const toggleLabel = (selectedLabel: Label) => {
-    setLabels((prev) => {
-      if (prev.includes(selectedLabel)) {
-        return prev.filter((label) => label !== selectedLabel);
-      }
-      return [...prev, selectedLabel];
-    });
-  };
-
-  const pickImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ["images", "videos"],
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-
-      if (!result.canceled) {
-        setMedia(result.assets[0].uri);
-      }
-    } catch (error) {
-      console.error(error);
-      Alert.alert("Error", "Failed to pick image");
-    }
-  };
-
-  const handleSubmit = () => {
-    onSubmit({
-      title,
-      content,
-      media,
-      labels,
-    });
-  };
-
   return (
     <>
       <Input

@@ -12,9 +12,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Spacer, styled, Text, View, XStack, YStack } from "tamagui";
 
 import { DiaryEntryDetails } from "@/components/DiaryEntryDetails";
-import type { DiaryEntryFormData } from "@/components/DiaryEntryForm";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
 import type { DiaryEntry } from "@/domain/DiaryEntry";
+import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
 import {
   diaryEntriesAtom,
   useCreateDiaryEntryAtom,
@@ -31,6 +31,12 @@ export default function DiaryEntry() {
 
   const [entry, setEntry] = useAtom(diaryEntryAtom);
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
+  const { formData, formActions } = useDiaryEntryForm({
+    title: entry?.title,
+    content: entry?.content,
+    media: entry?.media,
+    labels: entry?.labels,
+  });
 
   if (!entry) {
     return <Redirect href="/+not-found" />;
@@ -41,8 +47,8 @@ export default function DiaryEntry() {
     router.setParams({ isEditing: value ? "true" : "false" });
   };
 
-  const saveEdits = (updatedEntry: DiaryEntryFormData) => {
-    setEntry(updatedEntry);
+  const saveEdits = () => {
+    setEntry(formData);
     setIsEditing(false);
   };
 
@@ -88,13 +94,7 @@ export default function DiaryEntry() {
 
               <Spacer scaleY={"$2"} />
               {isEditing ? (
-                <DiaryEntryForm
-                  initialTitle={entry.title}
-                  initialContent={entry.content}
-                  initialMedia={entry.media}
-                  initialLabels={entry.labels}
-                  onSubmit={saveEdits}
-                />
+                <DiaryEntryForm {...formActions} {...formData} />
               ) : (
                 <DiaryEntryDetails diaryEntry={entry} />
               )}
@@ -128,14 +128,14 @@ export default function DiaryEntry() {
             ) : (
               <>
                 <Button
-                  onPress={() => saveEdits(entry)}
+                  onPress={formActions.pickImage}
                   icon={Camera}
                   color={"white"}
                   backgroundColor={"$colorTransparent"}
                   size={"$8"}
                 />
                 <Button
-                  onPress={() => saveEdits(entry)}
+                  onPress={saveEdits}
                   icon={Check}
                   color={"white"}
                   backgroundColor={"$colorTransparent"}
