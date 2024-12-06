@@ -1,6 +1,6 @@
 import { Ellipsis } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
-import { Card, Image, Separator, Spacer, Text } from "tamagui";
+import { Card, Image, Separator, Spacer, styled, Text } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 
@@ -17,64 +17,89 @@ export const DiaryEntryCard = ({
     <PressableWithFeedback
       onPress={() => router.push(`/diary-entry/${diaryEntry.id}`)}
     >
-      <Card
-        backgroundColor={"#473D52"}
-        paddingHorizontal="$3"
-        marginTop="$5"
-        key={diaryEntry.id}
-      >
-        <Card.Header
-          justifyContent="flex-start"
-          paddingHorizontal={0}
-          paddingTop={"$2.5"}
-          paddingBottom={"$2"}
-        >
+      <StyledCard key={diaryEntry.id}>
+        <CardHeader>
           {diaryEntry.media ? (
-            <Image
-              source={{ uri: diaryEntry.media.uri }}
-              borderRadius={"$4"}
-              width={"100%"}
-              height={150}
-              marginBottom="$3"
-              alignSelf="center"
-            />
+            <StyledImage source={{ uri: diaryEntry.media.uri }} />
           ) : null}
-          <Text
-            color={"white"}
-            fontSize={"$5"}
-            textAlign="left"
-            fontWeight="bold"
-          >
-            {diaryEntry.title}
-          </Text>
-        </Card.Header>
+          <TitleText>{diaryEntry.title}</TitleText>
+        </CardHeader>
 
-        <Text color={"white"} numberOfLines={3}>
-          {diaryEntry.content}
-        </Text>
+        <ContentText numberOfLines={3}>{diaryEntry.content}</ContentText>
         <Spacer scaleY={"$0.5"} />
-        <Separator borderColor={"#645A6D"} borderWidth={0.5} marginBottom={5} />
-        <Card.Footer
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="flex-start"
-          paddingBottom={5}
-        >
-          <Text color={"#ABA7B6"} fontSize={12} alignSelf="center">
+        <StyledSeparator />
+        <CardFooter>
+          <DateText>
             {diaryEntry.createdAt.toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
               day: "numeric",
             })}
-          </Text>
+          </DateText>
           <PressableWithFeedback
             hitSlop={15}
             onPress={() => onActionButtonPress(diaryEntry.id)}
           >
-            <Ellipsis size={"$2"} color={"#ABA7B6"} />
+            <StyledEllipsis />
           </PressableWithFeedback>
-        </Card.Footer>
-      </Card>
+        </CardFooter>
+      </StyledCard>
     </PressableWithFeedback>
   );
 };
+
+const StyledCard = styled(Card, {
+  backgroundColor: "#473D52",
+  paddingHorizontal: "$3",
+  marginTop: "$5",
+});
+
+const CardHeader = styled(Card.Header, {
+  justifyContent: "flex-start",
+  paddingHorizontal: 0,
+  paddingTop: "$2.5",
+  paddingBottom: "$2",
+});
+
+const StyledImage = styled(Image, {
+  borderRadius: "$4",
+  width: "100%",
+  height: 150,
+  marginBottom: "$3",
+  alignSelf: "center",
+});
+
+const TitleText = styled(Text, {
+  color: "white",
+  fontSize: "$5",
+  textAlign: "left",
+  fontWeight: "bold",
+});
+
+const ContentText = styled(Text, {
+  color: "white",
+});
+
+const StyledSeparator = styled(Separator, {
+  borderColor: "#645A6D",
+  borderWidth: 0.5,
+  marginBottom: 5,
+});
+
+const CardFooter = styled(Card.Footer, {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  paddingBottom: 5,
+});
+
+const DateText = styled(Text, {
+  color: "#ABA7B6",
+  fontSize: 12,
+  alignSelf: "center",
+});
+
+const StyledEllipsis = styled(Ellipsis, {
+  size: "$2",
+  color: "#ABA7B6",
+});
