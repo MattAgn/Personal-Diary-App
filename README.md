@@ -1,4 +1,8 @@
-# Lyynk diary test app
+# Diary test app
+
+## Description
+
+This is a small diary app built with Expo and Tamagui made for a technical interview.
 
 ## Get started
 
@@ -29,3 +33,22 @@ In the output, you'll find options to open the app in a
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+
+## Features
+
+- [x] Add a new diary entry with a title, content.
+- [x] View all diary entries.
+- [x] View a single diary entry.
+- [x] Edit a diary entry.
+- [x] Delete a diary entry.
+- [x] Add labels to a diary entry.
+- [x] Filter diary entries by content or title.
+- [x] Add an image to a diary entry.
+- [ ] Add audio notes (TODO)
+- [ ] Add icon & splash screen (TODO)
+- [ ] Add animations (TODO)
+
+## Remaining tasks
+
+- [ ] Use tamagui theme properly for colors
+- [ ] Fix bug when keyboard is open
