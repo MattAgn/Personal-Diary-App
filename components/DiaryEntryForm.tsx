@@ -30,7 +30,12 @@ export const DiaryEntryForm = ({
 }: DiaryEntryFormProps) => {
   return (
     <>
-      {media ? <MediaWithFullScreenDisplay media={media} /> : null}
+      {media ? (
+        <>
+          <MediaWithFullScreenDisplay media={media} />
+          <Spacer scaleY={"$2"} />
+        </>
+      ) : null}
 
       <XStack gap={"$2"} flexWrap="wrap" marginBottom="$4">
         {allLabels.map((label) => (
