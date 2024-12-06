@@ -14,7 +14,7 @@ import {
   useCreateDiaryEntryAtom,
 } from "@/store/diaryEntriesAtom";
 
-import { DiaryEntryModalLayout } from "../components/DiaryEntryModalLayout";
+import { DiaryEntryModalLayout } from "../../components/DiaryEntryModalLayout";
 
 export default function DiaryEntry() {
   const { id, isEditing: isEditingParam } = useLocalSearchParams<{

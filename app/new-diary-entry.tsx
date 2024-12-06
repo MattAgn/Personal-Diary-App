@@ -10,7 +10,7 @@ import { DiaryEntryForm } from "@/components/DiaryEntryForm";
 import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
-import { DiaryEntryModalLayout } from "./components/DiaryEntryModalLayout";
+import { DiaryEntryModalLayout } from "../components/DiaryEntryModalLayout";
 
 export default function NewDiaryEntry() {
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
