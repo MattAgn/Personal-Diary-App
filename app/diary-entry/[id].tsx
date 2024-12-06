@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Camera, PencilLine, Save, Trash } from "@tamagui/lucide-icons";
+import { Camera, Check, PencilLine, Trash } from "@tamagui/lucide-icons";
 import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { useAtom } from "jotai";
 import {
@@ -136,7 +136,7 @@ export default function DiaryEntry() {
                 />
                 <Button
                   onPress={() => saveEdits(entry)}
-                  icon={Save}
+                  icon={Check}
                   color={"white"}
                   backgroundColor={"$colorTransparent"}
                   size={"$8"}

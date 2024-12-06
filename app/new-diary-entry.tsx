@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Camera, Save, Trash } from "@tamagui/lucide-icons";
+import { Camera, Check, X } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { KeyboardAvoidingView, Platform } from "react-native";
@@ -83,16 +83,16 @@ export default function NewDiaryEntry() {
             />
             <Button
               onPress={() => {}}
-              icon={Save}
+              icon={Check}
               color={"white"}
               backgroundColor={"$colorTransparent"}
               size={"$8"}
             />
             <Button
               onPress={() => {}}
-              color={"red"}
+              color={"white"}
               backgroundColor={"$colorTransparent"}
-              icon={Trash}
+              icon={X}
               size={"$8"}
             />
           </XStack>
