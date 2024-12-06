@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { Pencil, Trash } from "@tamagui/lucide-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Button, Sheet, styled } from "tamagui";
+import { Button, Sheet, Spacer, styled } from "tamagui";
 
 type Props = {
   isSheetOpen: boolean;
@@ -28,8 +28,9 @@ export const ActionSheet = ({
       animation="medium"
     >
       <SheetOverlay />
-      <Sheet.Handle />
-      <SheetFrame paddingBottom={bottom + 10}>
+      <SheetFrame paddingBottom={bottom + 10} paddingTop={"$4"}>
+        <Sheet.Handle height={"$0.75"} />
+        <Spacer scaleY={"$3"} />
         <EditButton icon={Pencil} onPress={onEdit}>
           Edit
         </EditButton>
