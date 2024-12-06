@@ -13,7 +13,7 @@ export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
   return (
     <>
       {diaryEntry.media ? (
-        <MediaWithFullScreenDisplay mediaUri={diaryEntry.media} />
+        <MediaWithFullScreenDisplay mediaUri={diaryEntry.media.uri} />
       ) : null}
 
       {diaryEntry.labels.length > 0 && (

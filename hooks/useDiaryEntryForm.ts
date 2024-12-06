@@ -3,14 +3,14 @@ import { useState } from "react";
 import { Alert } from "react-native";
 
 import type { DiaryEntryFormData } from "@/components/DiaryEntryForm";
-import type { Label } from "@/domain/DiaryEntry";
+import type { Label, Media } from "@/domain/DiaryEntry";
 
 export const useDiaryEntryForm = (
   initialValues?: Partial<DiaryEntryFormData>,
 ) => {
   const [title, setTitle] = useState(initialValues?.title ?? "");
   const [content, setContent] = useState(initialValues?.content ?? "");
-  const [media, setMedia] = useState<string | null>(
+  const [media, setMedia] = useState<Media | null>(
     initialValues?.media ?? null,
   );
   const [labels, setLabels] = useState<Label[]>(initialValues?.labels ?? []);
@@ -34,7 +34,10 @@ export const useDiaryEntryForm = (
       });
 
       if (!result.canceled) {
-        setMedia(result.assets[0].uri);
+        setMedia({
+          uri: result.assets[0].uri,
+          type: result.assets[0].type,
+        });
       }
     } catch (error) {
       console.error(error);
