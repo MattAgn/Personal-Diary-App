@@ -45,5 +45,14 @@ This is a small diary app built with Expo and Tamagui made for a technical inter
 
 ## Remaining tasks
 
-- [ ] Use tamagui theme properly for colors
-- [ ] Fix bug when keyboard is open
+- [ ] Use tamagui theme properly for colors
+- [ ] Fix bug when keyboard is open
+
+## Screenshots
+
+| Page             | iOS                                               | Android                                                   |
+| ---------------- | ------------------------------------------------- | --------------------------------------------------------- |
+| Homepage         | ![Homepage iOS](./screenshots/ios-home.png)       | ![Homepage Android](./screenshots/android-home.png)       |
+| Diary Entry Page | ![Entry iOS](./screenshots/ios-entry-details.png) | ![Entry Android](./screenshots/android-entry-details.png) |
+| New Entry Page   | ![New Entry iOS](./screenshots/ios-new-entry.png) | ![New Entry Android](./screenshots/android-new-entry.png) |
+| Settings Page    | ![Settings iOS](./screenshots/ios-settings.png)   | ![Settings Android](./screenshots/android-settings.png)   |
