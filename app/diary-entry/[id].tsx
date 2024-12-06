@@ -2,14 +2,8 @@
 import { Camera, Check, PencilLine, Trash } from "@tamagui/lucide-icons";
 import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { useAtom } from "jotai";
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Spacer, styled, Text, View, XStack, YStack } from "tamagui";
+import { Alert } from "react-native";
+import { Button, XStack } from "tamagui";
 
 import { DiaryEntryDetails } from "@/components/DiaryEntryDetails";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
@@ -20,7 +14,7 @@ import {
   useCreateDiaryEntryAtom,
 } from "@/store/diaryEntriesAtom";
 
-const BOTTONS_BOTTOM_BAR_HEIGHT = 85;
+import { DiaryEntryModalLayout } from "../components/DiaryEntryModalLayout";
 
 export default function DiaryEntry() {
   const { id, isEditing: isEditingParam } = useLocalSearchParams<{
@@ -76,88 +70,62 @@ export default function DiaryEntry() {
     year: "numeric",
   });
 
+  if (isEditing) {
+    return (
+      <DiaryEntryModalLayout
+        title={formattedDate}
+        mainContent={<DiaryEntryForm {...formActions} {...formData} />}
+        bottomActions={
+          <>
+            <Button
+              onPress={formActions.pickImage}
+              icon={Camera}
+              color={"white"}
+              backgroundColor={"$colorTransparent"}
+              size={"$8"}
+            />
+            <Button
+              onPress={saveEdits}
+              icon={Check}
+              color={"white"}
+              backgroundColor={"$colorTransparent"}
+              size={"$8"}
+            />
+            <Button
+              onPress={() => showDeleteAlert()}
+              color={"red"}
+              backgroundColor={"$colorTransparent"}
+              icon={Trash}
+              size={"$8"}
+            />
+          </>
+        }
+      />
+    );
+  }
+
   return (
-    <StyledSafeAreaView edges={["top"]}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 60 : undefined}
-      >
-        <YStack justifyContent="space-between" flex={1}>
-          <ScrollView>
-            <View paddingHorizontal={"$4"}>
-              <XStack justifyContent="center" padding="$4">
-                <Text color="white" fontSize={"$7"}>
-                  {formattedDate}
-                </Text>
-              </XStack>
-
-              <Spacer scaleY={"$2"} />
-              {isEditing ? (
-                <DiaryEntryForm {...formActions} {...formData} />
-              ) : (
-                <DiaryEntryDetails diaryEntry={entry} />
-              )}
-
-              <Spacer scaleY={"$2"} />
-            </View>
-          </ScrollView>
-          <XStack
-            justifyContent="space-around"
-            backgroundColor={"#28282A"}
-            height={BOTTONS_BOTTOM_BAR_HEIGHT}
-            marginBottom={0}
-          >
-            {!isEditing ? (
-              <>
-                <Button
-                  onPress={() => setIsEditing(true)}
-                  icon={PencilLine}
-                  color={"white"}
-                  backgroundColor={"$colorTransparent"}
-                  size={"$8"}
-                />
-                <Button
-                  onPress={() => showDeleteAlert()}
-                  color={"red"}
-                  backgroundColor={"$colorTransparent"}
-                  icon={Trash}
-                  size={"$8"}
-                />
-              </>
-            ) : (
-              <>
-                <Button
-                  onPress={formActions.pickImage}
-                  icon={Camera}
-                  color={"white"}
-                  backgroundColor={"$colorTransparent"}
-                  size={"$8"}
-                />
-                <Button
-                  onPress={saveEdits}
-                  icon={Check}
-                  color={"white"}
-                  backgroundColor={"$colorTransparent"}
-                  size={"$8"}
-                />
-                <Button
-                  onPress={() => showDeleteAlert()}
-                  color={"red"}
-                  backgroundColor={"$colorTransparent"}
-                  icon={Trash}
-                  size={"$8"}
-                />
-              </>
-            )}
-          </XStack>
-        </YStack>
-      </KeyboardAvoidingView>
-    </StyledSafeAreaView>
+    <DiaryEntryModalLayout
+      title={formattedDate}
+      mainContent={<DiaryEntryDetails diaryEntry={entry} />}
+      bottomActions={
+        <XStack justifyContent="space-around">
+          <Button
+            onPress={() => setIsEditing(true)}
+            icon={PencilLine}
+            size={"$8"}
+            color={"white"}
+            backgroundColor={"$colorTransparent"}
+          />
+          <Button
+            onPress={() => showDeleteAlert()}
+            icon={Trash}
+            size={"$8"}
+            color={"red"}
+            backgroundColor={"$colorTransparent"}
+          />
+        </XStack>
+      }
+    />
   );
 }
-
-const StyledSafeAreaView = styled(SafeAreaView, {
-  flex: 1,
-  backgroundColor: "#1C1C1E",
-});
