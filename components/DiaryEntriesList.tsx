@@ -1,4 +1,4 @@
-import { FlatList } from "react-native";
+import Animated, { LinearTransition } from "react-native-reanimated";
 import { Text, View } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
@@ -21,15 +21,19 @@ export function DiaryEntriesList({
       <DiaryEntryCard
         diaryEntry={item}
         onActionButtonPress={onActionButtonPress}
+        key={item.id}
       />
     );
   };
 
   return (
-    <FlatList
+    <Animated.FlatList
       data={entries}
       renderItem={renderItem}
       ListEmptyComponent={EmptyListComponent}
+      itemLayoutAnimation={LinearTransition.duration(400)}
+      layout={LinearTransition.duration(400)}
+      keyExtractor={(item) => item.id}
     />
   );
 }
