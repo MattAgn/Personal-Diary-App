@@ -17,7 +17,17 @@ export default function NewDiaryEntry() {
   const { formData, formActions } = useDiaryEntryForm();
   const createdAt = new Date();
 
+  const isFormEmpty =
+    formData.title.length === 0 &&
+    formData.content.length === 0 &&
+    formData.media === null;
+
   const handleSubmit = () => {
+    if (isFormEmpty) {
+      router.back();
+      return;
+    }
+
     setDiaryEntries([
       ...diaryEntries,
       {
