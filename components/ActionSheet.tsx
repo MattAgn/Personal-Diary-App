@@ -27,7 +27,11 @@ export const ActionSheet = ({
       dismissOnOverlayPress
       animation="medium"
     >
-      <SheetOverlay />
+      <Sheet.Overlay
+        animation="medium"
+        enterStyle={{ opacity: 0 }}
+        exitStyle={{ opacity: 0 }}
+      />
       <SheetFrame paddingBottom={bottom + 10} paddingTop={"$4"}>
         <Sheet.Handle height={"$0.75"} />
         <Spacer scaleY={"$3"} />
@@ -41,12 +45,6 @@ export const ActionSheet = ({
     </Sheet>
   );
 };
-
-const SheetOverlay = styled(Sheet.Overlay, {
-  animation: "medium",
-  enterStyle: { opacity: 0 },
-  exitStyle: { opacity: 0 },
-});
 
 const SheetFrame = styled(Sheet.Frame, {
   backgroundColor: "#51355B",
