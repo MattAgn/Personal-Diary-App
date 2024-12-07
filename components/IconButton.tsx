@@ -4,6 +4,11 @@ export const IconButton = styled(Button, {
   color: "white",
   size: "$8",
   circular: true,
+  pressStyle: {
+    backgroundColor: "$colorTransparent",
+    borderColor: "$colorTransparent",
+    opacity: 0.5,
+  },
   variants: {
     destructive: {
       true: {
@@ -14,11 +19,6 @@ export const IconButton = styled(Button, {
       true: {
         backgroundColor: "$colorTransparent",
         borderColor: "$colorTransparent",
-        pressStyle: {
-          backgroundColor: "$colorTransparent",
-          borderColor: "$colorTransparent",
-          opacity: 0.5,
-        },
       },
     },
     withShadow: {
