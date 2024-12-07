@@ -3,7 +3,7 @@ import { createTamagui, createTokens } from "tamagui";
 
 export const Colors = {
   dark: "#1C1C1E",
-  lightDark: "#28282A",
+  darkLight: "#28282A",
   purpleLight: "#5C3A65",
   purpleDark: "#0E1020",
   purple: "#30213E",
@@ -30,7 +30,7 @@ export const theme = createTamagui({
     dark: {
       // Background colors
       background: Colors.dark,
-      darkLightBackground: Colors.lightDark,
+      darkLightBackground: Colors.darkLight,
       greyPurpleBackground: Colors.greyPurple,
       purpleBackground: Colors.purple,
       accentBackground: Colors.accent,

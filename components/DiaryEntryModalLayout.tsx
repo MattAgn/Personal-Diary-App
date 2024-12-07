@@ -42,7 +42,7 @@ const ContentContainer = styled(YStack, {
 
 const BottomActionsBar = styled(XStack, {
   justifyContent: "space-around",
-  backgroundColor: "$lightDarkBackground",
+  backgroundColor: "$darkLightBackground",
   height: BUTTONS_BOTTOM_BAR_HEIGHT,
   marginBottom: 0,
 });
