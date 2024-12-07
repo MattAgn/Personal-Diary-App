@@ -1,8 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import type React from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView, styled, XStack, YStack } from "tamagui";
+import { useEffect, useState } from "react";
+import type { KeyboardEvent } from "react-native";
+import { Keyboard, Platform } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
+import { styled, XStack } from "tamagui";
 
 import { JsStack } from "@/app/_layout";
 import { Colors } from "@/theme";
@@ -17,40 +23,70 @@ export function DiaryEntryModalLayout({
   bottomActions,
 }: DiaryEntryModalLayoutProps) {
   const header = () => <ModalHeader title={title} />;
+  const { bottom: safeBottomInset } = useSafeAreaInsets();
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener(
+      Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow",
+      (e: KeyboardEvent) => {
+        setKeyboardHeight(e.endCoordinates.height);
+      },
+    );
+    const hideSubscription = Keyboard.addListener(
+      Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide",
+      () => {
+        setKeyboardHeight(0);
+      },
+    );
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   return (
     <SafeAreaView
       edges={["bottom"]}
       style={{ flex: 1, backgroundColor: Colors.darkLight }}
     >
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      <JsStack.Screen options={{ header }} />
+      <KeyboardAwareScrollView
+        enableOnAndroid
+        keyboardShouldPersistTaps="handled"
+        scrollToOverflowEnabled
+        extraScrollHeight={
+          Platform.OS === "ios" ? BUTTONS_BOTTOM_BAR_HEIGHT : 0
+        }
         style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 160 : undefined}
+        contentContainerStyle={{
+          backgroundColor: Colors.dark,
+          paddingBottom: keyboardHeight > 0 ? 0 : BUTTONS_BOTTOM_BAR_HEIGHT,
+        }}
       >
-        <ContentContainer>
-          <JsStack.Screen options={{ header }} />
-          <ScrollView contentContainerStyle={{ paddingHorizontal: "$1" }}>
-            {mainContent}
-          </ScrollView>
-
-          <BottomActionsBar>{bottomActions}</BottomActionsBar>
-        </ContentContainer>
-      </KeyboardAvoidingView>
+        {mainContent}
+      </KeyboardAwareScrollView>
+      <BottomActionsBar
+        style={{
+          bottom:
+            keyboardHeight > 0 ? keyboardHeight - safeBottomInset + 20 : 0,
+        }}
+      >
+        {bottomActions}
+      </BottomActionsBar>
     </SafeAreaView>
   );
 }
 
-const ContentContainer = styled(YStack, {
-  justifyContent: "space-between",
-  flex: 1,
-  backgroundColor: "$background",
-});
-
 const BottomActionsBar = styled(XStack, {
   justifyContent: "space-around",
   backgroundColor: "$darkLightBackground",
-  paddingTop: "$2",
+  paddingVertical: "$2",
+  height: BUTTONS_BOTTOM_BAR_HEIGHT,
+  position: "absolute",
+  left: 0,
+  right: 0,
 });
 
 type DiaryEntryModalLayoutProps = {

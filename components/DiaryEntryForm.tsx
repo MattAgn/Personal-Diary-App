@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import { Input, Spacer, styled, TextArea, View, XStack } from "tamagui";
 
 import type { AudioRecording, Label, Media } from "@/domain/DiaryEntry";
@@ -68,7 +69,8 @@ export const DiaryEntryForm = ({
         fontSize={"$5"}
         value={content}
         onChangeText={setContent}
-        numberOfLines={200} // use big number so that text area takes the rest of the screen on android
+        scrollEnabled={Platform.OS === "ios" ? false : true} // import on ios to have keyboard handling working
+        numberOfLines={Platform.OS === "ios" ? undefined : 200} // use big number so that text area takes the rest of the screen on android
       />
     </>
   );
