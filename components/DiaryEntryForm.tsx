@@ -1,4 +1,4 @@
-import { Input, Spacer, styled, XStack } from "tamagui";
+import { Input, Spacer, styled, TextArea, XStack } from "tamagui";
 
 import type { Label, Media } from "@/domain/DiaryEntry";
 import { allLabels } from "@/domain/DiaryEntry";
@@ -55,11 +55,9 @@ export const DiaryEntryForm = ({
         onChangeText={setTitle}
       />
       <Spacer scaleY={"$0.25"} />
-      <TransparentInput
+      <TransparentTextArea
         placeholder="What's on your mind?"
-        multiline
         fontSize={"$5"}
-        numberOfLines={7}
         value={content}
         onChangeText={setContent}
       />
@@ -68,6 +66,11 @@ export const DiaryEntryForm = ({
 };
 
 const TransparentInput = styled(Input, {
+  backgroundColor: "$colorTransparent",
+  borderColor: "$colorTransparent",
+});
+
+const TransparentTextArea = styled(TextArea, {
   backgroundColor: "$colorTransparent",
   borderColor: "$colorTransparent",
 });
