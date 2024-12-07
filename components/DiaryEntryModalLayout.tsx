@@ -19,7 +19,7 @@ export function DiaryEntryModalLayout({
         keyboardVerticalOffset={Platform.OS === "ios" ? 60 : undefined}
       >
         <ContentContainer>
-          <ScrollView paddingHorizontal="$4">
+          <ScrollView contentContainerStyle={{ paddingHorizontal: "$4" }}>
             <HeaderContainer>
               <HeaderText>{title}</HeaderText>
             </HeaderContainer>
@@ -35,6 +35,7 @@ export function DiaryEntryModalLayout({
     </StyledSafeAreaView>
   );
 }
+
 const ContentContainer = styled(YStack, {
   justifyContent: "space-between",
   flex: 1,
