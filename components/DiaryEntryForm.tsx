@@ -60,6 +60,7 @@ export const DiaryEntryForm = ({
         fontSize={"$5"}
         value={content}
         onChangeText={setContent}
+        numberOfLines={200} // use big number so that text area takes the rest of the screen on android
       />
     </>
   );
@@ -73,6 +74,7 @@ const TransparentInput = styled(Input, {
 const TransparentTextArea = styled(TextArea, {
   backgroundColor: "$colorTransparent",
   borderColor: "$colorTransparent",
+  textAlignVertical: "top",
 });
 
 const LabelsRow = styled(XStack, {
