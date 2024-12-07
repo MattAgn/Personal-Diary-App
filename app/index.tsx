@@ -16,6 +16,7 @@ import {
 } from "@/components/DiaryEntriesList";
 import { IconButton } from "@/components/IconButton";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
+import { Colors } from "@/theme";
 
 export default function HomeScreen() {
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
@@ -69,7 +70,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <StyledLinearGradient colors={["#0E1020", "#5C3A65"]}>
+    <StyledLinearGradient colors={[Colors.purpleDark, Colors.purpleLight]}>
       <StyledSafeAreaView edges={["top"]}>
         <MainContainer>
           <HeaderRowContainer>
@@ -79,7 +80,7 @@ export default function HomeScreen() {
               onPress={() => router.push("/settings")}
               transparent
             >
-              <Settings color={"white"} />
+              <Settings />
             </IconButton>
           </HeaderRowContainer>
           <Spacer scaleY={"$1"} />
@@ -87,6 +88,9 @@ export default function HomeScreen() {
             placeholder="Search"
             value={searchQuery}
             onChangeText={setSearchQuery}
+            backgroundColor="$white"
+            color="$darkText"
+            placeholderTextColor="$grey"
           />
           <DiaryEntriesList
             entries={filteredAndSortedEntries}
@@ -104,7 +108,7 @@ export default function HomeScreen() {
               onPress={() => router.push("/new-diary-entry")}
               alignSelf="center"
               icon={Plus}
-              backgroundColor="#5E5CE5"
+              backgroundColor="$accentBackground"
               withShadow
             />
           </BottomButtonContainer>
@@ -138,7 +142,6 @@ const BottomButtonContainer = styled(XStack, {
 });
 
 const HeaderTitle = styled(H1, {
-  color: "white",
   size: "$9",
 });
 

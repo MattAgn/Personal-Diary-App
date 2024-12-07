@@ -32,7 +32,7 @@ export const DiaryEntryCard = ({
           <TitleText>{diaryEntry.title}</TitleText>
         </CardHeader>
 
-        <ContentText numberOfLines={3}>{diaryEntry.content}</ContentText>
+        <Text numberOfLines={3}>{diaryEntry.content}</Text>
         <Spacer scaleY={"$0.5"} />
         <StyledSeparator />
         <CardFooter>
@@ -54,7 +54,7 @@ export const DiaryEntryCard = ({
 };
 
 const StyledCard = styled(Card, {
-  backgroundColor: "#473D52",
+  backgroundColor: "$greyPurpleBackground",
   paddingHorizontal: "$3",
   marginTop: "$5",
 });
@@ -77,14 +77,9 @@ const styles = StyleSheet.create({
 });
 
 const TitleText = styled(Text, {
-  color: "white",
   fontSize: "$5",
   textAlign: "left",
   fontWeight: "bold",
-});
-
-const ContentText = styled(Text, {
-  color: "white",
 });
 
 const StyledSeparator = styled(Separator, {
@@ -101,7 +96,7 @@ const CardFooter = styled(Card.Footer, {
 });
 
 const DateText = styled(Text, {
-  color: "#ABA7B6",
+  color: "$greyText",
   fontSize: 12,
   alignSelf: "center",
 });
@@ -110,5 +105,5 @@ const ActionButton = styled(IconButton, {
   transparent: true,
   size: "$2",
   scaleIcon: 2,
-  color: "#ABA7B6",
+  color: "$greyText",
 });

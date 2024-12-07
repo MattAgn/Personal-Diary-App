@@ -9,8 +9,7 @@ type Props = {
 export const LabelButton = ({ isActive, label, toggleLabel }: Props) => {
   return (
     <Button
-      backgroundColor={isActive ? "$accentBackground" : "$background"}
-      color={isActive ? "$accentForeground" : "$foreground"}
+      backgroundColor={isActive ? "$accentBackground" : "$greyPurpleBackground"}
       size={"$2"}
       borderRadius={20}
       paddingHorizontal={"$3"}

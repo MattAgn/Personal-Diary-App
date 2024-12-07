@@ -70,7 +70,6 @@ export const DiaryEntryForm = ({
 const TransparentInput = styled(Input, {
   backgroundColor: "$colorTransparent",
   borderColor: "$colorTransparent",
-  color: "white",
 });
 
 const LabelsRow = styled(XStack, {

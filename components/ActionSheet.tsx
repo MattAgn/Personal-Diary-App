@@ -31,9 +31,10 @@ export const ActionSheet = ({
         animation="medium"
         enterStyle={{ opacity: 0 }}
         exitStyle={{ opacity: 0 }}
+        backgroundColor="rgba(0, 0, 0, 0.6)"
       />
       <SheetFrame paddingBottom={bottom + 10} paddingTop={"$4"}>
-        <Sheet.Handle height={"$0.75"} />
+        <Sheet.Handle height={"$0.75"} backgroundColor="$greyLight" />
         <Spacer scaleY={"$3"} />
         <EditButton icon={Pencil} onPress={onEdit}>
           Edit
@@ -47,7 +48,7 @@ export const ActionSheet = ({
 };
 
 const SheetFrame = styled(Sheet.Frame, {
-  backgroundColor: "#51355B",
+  backgroundColor: "$purpleBackground",
   paddingTop: "$5",
   paddingHorizontal: "$5",
   gap: "$1",
@@ -55,10 +56,10 @@ const SheetFrame = styled(Sheet.Frame, {
 
 const EditButton = styled(Button, {
   marginBottom: "$3",
-  backgroundColor: "#CDCDCD",
+  backgroundColor: "$purpleLight",
 });
 
 const DeleteButton = styled(Button, {
-  color: "red",
-  backgroundColor: "#CDCDCD",
+  color: "$danger",
+  backgroundColor: "$purpleLight",
 });

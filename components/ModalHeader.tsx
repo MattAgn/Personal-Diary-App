@@ -6,7 +6,7 @@ import { IconButton } from "./IconButton";
 
 export const ModalHeader = ({
   title,
-  backgroundColor = "#1C1C1E",
+  backgroundColor = "$background",
 }: {
   title: string;
   backgroundColor?: string;
@@ -25,6 +25,5 @@ const HeaderContainer = styled(XStack, {
 });
 
 const HeaderText = styled(Text, {
-  color: "white",
   fontSize: "$7",
 });

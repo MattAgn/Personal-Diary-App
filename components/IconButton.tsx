@@ -1,7 +1,6 @@
 import { Button, styled } from "tamagui";
 
 export const IconButton = styled(Button, {
-  color: "white",
   size: "$8",
   circular: true,
   pressStyle: {
@@ -12,7 +11,7 @@ export const IconButton = styled(Button, {
   variants: {
     destructive: {
       true: {
-        color: "red",
+        color: "$danger",
       },
     },
     transparent: {
@@ -23,7 +22,7 @@ export const IconButton = styled(Button, {
     },
     withShadow: {
       true: {
-        shadowColor: "#000",
+        shadowColor: "$dark",
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.5,
         shadowRadius: 5,

@@ -37,12 +37,12 @@ export function DiaryEntryModalLayout({
 const ContentContainer = styled(YStack, {
   justifyContent: "space-between",
   flex: 1,
-  backgroundColor: "#1C1C1E",
+  backgroundColor: "$background",
 });
 
 const BottomActionsBar = styled(XStack, {
   justifyContent: "space-around",
-  backgroundColor: "#28282A",
+  backgroundColor: "$lightDarkBackground",
   height: BUTTONS_BOTTOM_BAR_HEIGHT,
   marginBottom: 0,
 });

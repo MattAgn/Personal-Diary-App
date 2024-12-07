@@ -41,9 +41,7 @@ export function DiaryEntriesList({
 export const DiaryEntriesNoSearchResult = () => {
   return (
     <View alignItems="center" padding="$4">
-      <Text color={"white"} fontSize={"$5"}>
-        No entries found matching your search
-      </Text>
+      <Text fontSize={"$5"}>No entries found matching your search</Text>
     </View>
   );
 };
@@ -51,9 +49,7 @@ export const DiaryEntriesNoSearchResult = () => {
 export const DiaryNoEntriesYet = () => {
   return (
     <View alignItems="center" padding="$4">
-      <Text color={"white"} fontSize={"$5"}>
-        No entries yet, add your first one!
-      </Text>
+      <Text fontSize={"$5"}>No entries yet, add your first one!</Text>
     </View>
   );
 };

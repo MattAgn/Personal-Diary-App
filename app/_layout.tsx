@@ -48,7 +48,7 @@ export default function RootLayout() {
   }
 
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={"light"}>
+    <TamaguiProvider config={tamaguiConfig} defaultTheme={"dark"}>
       <JsStack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
@@ -75,7 +75,7 @@ export const ErrorBoundary = ({ error, retry }: ErrorBoundaryProps) => {
       flex={1}
       justifyContent="center"
       alignItems="center"
-      backgroundColor={"red"}
+      backgroundColor="$danger"
     >
       <Text fontSize={"$7"}>Something went wrong</Text>
       <Spacer scaleY={"$2"} />

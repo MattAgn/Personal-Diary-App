@@ -43,23 +43,23 @@ export default function SettingsScreen() {
   };
 
   const header = () => (
-    <ModalHeader title="Settings" backgroundColor="#30213E" />
+    <ModalHeader title="Settings" backgroundColor="$purpleBackground" />
   );
 
   return (
     <Container>
       <JsStack.Screen options={{ header }} />
-      <Button icon={History} onPress={onResetDiaryWithFakeData} size={"$5"}>
+      <StyledButton icon={History} onPress={onResetDiaryWithFakeData}>
         Reset diary with fake data
-      </Button>
+      </StyledButton>
       <Spacer scaleY={"$2"} />
-      <Button icon={History} onPress={onResetDiaryWithNoData} size={"$5"}>
+      <StyledButton icon={History} onPress={onResetDiaryWithNoData}>
         Reset diary with no data
-      </Button>
+      </StyledButton>
       <Spacer scaleY={"$2"} />
-      <Button icon={FileDown} onPress={handleShareDiaryEntries} size={"$5"}>
+      <StyledButton icon={FileDown} onPress={handleShareDiaryEntries}>
         Export diary to pdf
-      </Button>
+      </StyledButton>
     </Container>
   );
 }
@@ -67,5 +67,10 @@ export default function SettingsScreen() {
 const Container = styled(View, {
   flex: 1,
   paddingHorizontal: "$4",
-  backgroundColor: "#30213E",
+  backgroundColor: "$purpleBackground",
+});
+
+const StyledButton = styled(Button, {
+  backgroundColor: "$purpleLight",
+  size: "$5",
 });

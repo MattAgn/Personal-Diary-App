@@ -1,7 +1,8 @@
-import { config } from "@tamagui/config/v3";
 import { createTamagui } from "tamagui";
 
-export const tamaguiConfig = createTamagui(config);
+import { theme } from "@/theme";
+
+export const tamaguiConfig = createTamagui(theme);
 
 export default tamaguiConfig;
 

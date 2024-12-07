@@ -27,13 +27,11 @@ export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
         </XStack>
       )}
 
-      <Text fontWeight="bold" fontSize={"$7"} color="white">
+      <Text fontWeight="bold" fontSize={"$7"}>
         {diaryEntry.title}
       </Text>
       <Spacer scaleY={1} />
-      <Text color="white" fontSize={"$5"}>
-        {diaryEntry.content}
-      </Text>
+      <Text fontSize={"$5"}>{diaryEntry.content}</Text>
       <Spacer scaleY={1} />
     </>
   );
