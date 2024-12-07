@@ -24,7 +24,7 @@ export function DiaryEntryModalLayout({
     >
       <ContentContainer>
         <JsStack.Screen options={{ header }} />
-        <ScrollView contentContainerStyle={{ paddingHorizontal: "$4" }}>
+        <ScrollView contentContainerStyle={{ paddingHorizontal: "$1" }}>
           {mainContent}
         </ScrollView>
 

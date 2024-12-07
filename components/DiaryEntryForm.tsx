@@ -76,4 +76,5 @@ const LabelsRow = styled(XStack, {
   gap: "$2",
   flexWrap: "wrap",
   marginBottom: "$4",
+  paddingHorizontal: "$4",
 });

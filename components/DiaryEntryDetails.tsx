@@ -1,4 +1,4 @@
-import { Spacer, Text, XStack } from "tamagui";
+import { Spacer, Text, View, XStack } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 
@@ -11,7 +11,7 @@ type DiaryEntryDetailsProps = {
 
 export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
   return (
-    <>
+    <View paddingHorizontal="$4">
       {diaryEntry.media ? (
         <>
           <MediaWithFullScreenDisplay media={diaryEntry.media} />
@@ -33,6 +33,6 @@ export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
       <Spacer scaleY={1} />
       <Text fontSize={"$5"}>{diaryEntry.content}</Text>
       <Spacer scaleY={1} />
-    </>
+    </View>
   );
 };
