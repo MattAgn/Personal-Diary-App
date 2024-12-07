@@ -3,9 +3,21 @@ import "react-native-reanimated";
 // important to import this before uuid which is used in the new-diary-entry screen
 import "react-native-get-random-values";
 
+import type {
+  ParamListBase,
+  StackNavigationState,
+} from "@react-navigation/native";
+import type {
+  StackNavigationEventMap,
+  StackNavigationOptions,
+} from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import type { ErrorBoundaryProps } from "expo-router";
-import { Stack } from "expo-router";
+import { Stack, withLayoutContext } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useAtom } from "jotai";
@@ -37,28 +49,13 @@ export default function RootLayout() {
 
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme={"light"}>
-      <Stack>
+      <JsStack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
-        <Stack.Screen
-          name="settings"
-          options={{ presentation: "modal", headerShown: false }}
-        />
-        <Stack.Screen
-          name="new-diary-entry"
-          options={{
-            presentation: "modal",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="diary-entry/[id]"
-          options={{
-            presentation: "modal",
-            headerShown: false,
-          }}
-        />
-      </Stack>
+        <JsStack.Screen name="settings" options={modalOptions} />
+        <JsStack.Screen name="new-diary-entry" options={modalOptions} />
+        <JsStack.Screen name="diary-entry/[id]" options={modalOptions} />
+      </JsStack>
       <StatusBar style="auto" />
     </TamaguiProvider>
   );
@@ -90,3 +87,23 @@ export const ErrorBoundary = ({ error, retry }: ErrorBoundaryProps) => {
     </View>
   );
 };
+
+const { Navigator } = createStackNavigator();
+
+/**
+ * This is a workaround to use the modal transition as in ios because native android modal does not behave like a modal
+ * Comes from https://github.com/expo/router/issues/640
+ */
+const modalOptions: StackNavigationOptions = {
+  ...TransitionPresets.ModalPresentationIOS,
+  presentation: "modal",
+  headerShown: false,
+  gestureEnabled: true,
+};
+
+const JsStack = withLayoutContext<
+  StackNavigationOptions,
+  typeof Navigator,
+  StackNavigationState<ParamListBase>,
+  StackNavigationEventMap
+>(Navigator);
