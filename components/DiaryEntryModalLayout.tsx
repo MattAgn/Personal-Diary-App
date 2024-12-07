@@ -20,7 +20,7 @@ export function DiaryEntryModalLayout({
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       style={{ flex: 1 }}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 60 : undefined}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 150 : undefined}
     >
       <ContentContainer>
         <JsStack.Screen options={{ header }} />
