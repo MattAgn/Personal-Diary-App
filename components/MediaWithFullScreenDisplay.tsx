@@ -1,8 +1,16 @@
+/* eslint-disable react-native/no-inline-styles */
 import { X } from "@tamagui/lucide-icons";
 import { ResizeMode, Video } from "expo-av";
+import { Image } from "expo-image";
 import { useState } from "react";
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { useSafeAreaFrame } from "react-native-safe-area-context";
-import { Button, Image, Spacer, styled, YStack } from "tamagui";
+import { Button, Spacer, styled, YStack } from "tamagui";
 
 import type { Media } from "@/domain/DiaryEntry";
 
@@ -19,6 +27,22 @@ export const MediaWithFullScreenDisplay = ({
   const [isImageFullscreen, setIsImageFullscreen] = useState(false);
   const { width: screenWidth, height: screenHeight } = useSafeAreaFrame();
   const isImage = media.type === "image" || media.type === "livePhoto";
+  const opacity = useSharedValue(0);
+
+  const handlePress = () => {
+    setIsImageFullscreen(true);
+    opacity.value = withTiming(1, { duration: 500 });
+  };
+
+  const handleClose = () => {
+    opacity.value = withTiming(0, { duration: 500 }, () => {
+      runOnJS(setIsImageFullscreen)(false);
+    });
+  };
+
+  const overlayStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
 
   if (!isImage) {
     return (
@@ -32,32 +56,41 @@ export const MediaWithFullScreenDisplay = ({
 
   return (
     <>
-      <PressableWithFeedback onPress={() => setIsImageFullscreen(true)}>
-        <StyledInlineImage source={{ uri: media.uri }} />
+      <PressableWithFeedback onPress={handlePress}>
+        <Image
+          source={{ uri: media.uri }}
+          transition={400}
+          style={{
+            width: "100%",
+            height: MEDIA_HEIGHT,
+            borderRadius: 15,
+            paddingHorizontal: 10,
+          }}
+        />
         <Spacer scaleY={"$2"} />
       </PressableWithFeedback>
+
       {isImageFullscreen && (
-        <Overlay
+        <AnimatedOverlay
+          style={overlayStyle}
           width={screenWidth}
           height={screenHeight}
           paddingBottom={BUTTONS_BOTTOM_BAR_HEIGHT}
         >
-          <FullScreenImage source={{ uri: media.uri }} />
-          <CloseButton icon={X} onPress={() => setIsImageFullscreen(false)} />
-        </Overlay>
+          <Image
+            source={{ uri: media.uri }}
+            transition={300}
+            style={{ width: "100%", height: "100%" }}
+            contentFit="contain"
+          />
+          <CloseButton icon={X} onPress={handleClose} />
+        </AnimatedOverlay>
       )}
     </>
   );
 };
 
 const MEDIA_HEIGHT = 200;
-
-const StyledInlineImage = styled(Image, {
-  width: "100%",
-  height: MEDIA_HEIGHT,
-  paddingHorizontal: "$2",
-  borderRadius: "$4",
-});
 
 const StyledInlineVideo = styled(Video, {
   width: "100%",
@@ -74,6 +107,8 @@ const Overlay = styled(YStack, {
   alignItems: "center",
 });
 
+const AnimatedOverlay = Animated.createAnimatedComponent(Overlay);
+
 const CloseButton = styled(Button, {
   position: "absolute",
   top: "$5",
@@ -82,10 +117,4 @@ const CloseButton = styled(Button, {
   circular: true,
   backgroundColor: "$background",
   opacity: 0.8,
-});
-
-const FullScreenImage = styled(Image, {
-  width: "100%",
-  height: "100%",
-  objectFit: "contain",
 });

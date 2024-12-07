@@ -1,6 +1,8 @@
 import { Ellipsis } from "@tamagui/lucide-icons";
+import { Image } from "expo-image";
 import { router } from "expo-router";
-import { Card, Image, Separator, Spacer, styled, Text } from "tamagui";
+import { StyleSheet } from "react-native";
+import { Card, Separator, Spacer, styled, Text } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 
@@ -21,7 +23,11 @@ export const DiaryEntryCard = ({
       <StyledCard key={diaryEntry.id}>
         <CardHeader>
           {diaryEntry.media ? (
-            <StyledImage source={{ uri: diaryEntry.media.uri }} />
+            <Image
+              source={{ uri: diaryEntry.media.uri }}
+              transition={{ duration: 350, timing: "ease-in-out" }}
+              style={styles.image}
+            />
           ) : null}
           <TitleText>{diaryEntry.title}</TitleText>
         </CardHeader>
@@ -60,12 +66,14 @@ const CardHeader = styled(Card.Header, {
   paddingBottom: "$2",
 });
 
-const StyledImage = styled(Image, {
-  borderRadius: "$4",
-  width: "100%",
-  height: 150,
-  marginBottom: "$3",
-  alignSelf: "center",
+const styles = StyleSheet.create({
+  image: {
+    borderRadius: 15,
+    width: "100%",
+    height: 150,
+    marginBottom: 10,
+    alignSelf: "center",
+  },
 });
 
 const TitleText = styled(Text, {
