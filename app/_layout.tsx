@@ -97,11 +97,10 @@ const { Navigator } = createStackNavigator();
 const modalOptions: StackNavigationOptions = {
   ...TransitionPresets.ModalPresentationIOS,
   presentation: "modal",
-  headerShown: false,
   gestureEnabled: true,
 };
 
-const JsStack = withLayoutContext<
+export const JsStack = withLayoutContext<
   StackNavigationOptions,
   typeof Navigator,
   StackNavigationState<ParamListBase>,

@@ -2,12 +2,14 @@ import { FileDown, History } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { Alert } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, H1, Spacer, styled } from "tamagui";
+import { Button, Spacer, styled, View } from "tamagui";
 
+import { ModalHeader } from "@/components/ModalHeader";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 import { fakeDiaryEntries } from "@/utils/fakeDiaryEntries";
 import { shareDiaryEntriesPdf } from "@/utils/shareDiaryEntriesPdf";
+
+import { JsStack } from "./_layout";
 
 export default function SettingsScreen() {
   const [_, setDiaryEntries] = useAtom(diaryEntriesAtom);
@@ -40,12 +42,13 @@ export default function SettingsScreen() {
     await shareDiaryEntriesPdf(fakeDiaryEntries);
   };
 
+  const header = () => (
+    <ModalHeader title="Settings" backgroundColor="#30213E" />
+  );
+
   return (
-    <StyledSafeAreaView>
-      <H1 color="white" size={"$9"}>
-        Settings
-      </H1>
-      <Spacer scaleY={"$2"} />
+    <Container>
+      <JsStack.Screen options={{ header }} />
       <Button icon={History} onPress={onResetDiaryWithFakeData} size={"$5"}>
         Reset diary with fake data
       </Button>
@@ -57,13 +60,12 @@ export default function SettingsScreen() {
       <Button icon={FileDown} onPress={handleShareDiaryEntries} size={"$5"}>
         Export diary to pdf
       </Button>
-    </StyledSafeAreaView>
+    </Container>
   );
 }
 
-const StyledSafeAreaView = styled(SafeAreaView, {
+const Container = styled(View, {
   flex: 1,
-  paddingTop: "$6",
   paddingHorizontal: "$4",
   backgroundColor: "#30213E",
 });
