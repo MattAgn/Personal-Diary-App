@@ -4,6 +4,7 @@ import { Card, Image, Separator, Spacer, styled, Text } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 
+import { IconButton } from "./IconButton";
 import { PressableWithFeedback } from "./PressableWithFeedback";
 
 export const DiaryEntryCard = ({
@@ -36,12 +37,10 @@ export const DiaryEntryCard = ({
               day: "numeric",
             })}
           </DateText>
-          <PressableWithFeedback
-            hitSlop={15}
+          <ActionButton
+            icon={Ellipsis}
             onPress={() => onActionButtonPress(diaryEntry.id)}
-          >
-            <StyledEllipsis />
-          </PressableWithFeedback>
+          />
         </CardFooter>
       </StyledCard>
     </PressableWithFeedback>
@@ -99,7 +98,9 @@ const DateText = styled(Text, {
   alignSelf: "center",
 });
 
-const StyledEllipsis = styled(Ellipsis, {
+const ActionButton = styled(IconButton, {
+  transparent: true,
   size: "$2",
+  scaleIcon: 2,
   color: "#ABA7B6",
 });
