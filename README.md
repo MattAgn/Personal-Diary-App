@@ -52,11 +52,8 @@ On the Android emulator, you need to enable 'virtual microphone uses host audio 
 
 Video of the app in on iOS simulator:
 
-https://github.com/user-attachments/assets/8c77b64d-ef96-4aba-bc2b-5fd910614a3e
+https://github.com/user-attachments/assets/1b91a44b-0244-41e5-a794-7dab946572cc
 
-https://github.com/user-attachments/assets/85959f39-785c-40cb-9412-cf127723d7de
-
-https://github.com/user-attachments/assets/46fd4425-bdd6-41b1-aeca-c7f1a5aec885
 
 | Page             | iOS                                               | Android                                                   |
 | ---------------- | ------------------------------------------------- | --------------------------------------------------------- |
