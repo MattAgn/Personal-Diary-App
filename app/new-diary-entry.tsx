@@ -1,14 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Camera, Check, Mic, X } from "@tamagui/lucide-icons";
+import { Camera, Check, X } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { Alert } from "react-native";
+import { Button } from "tamagui";
 import { v6 as uuidv6 } from "uuid";
 
 import { AudioRecordingSheet } from "@/components/AudioRecordingSheet";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
-import { IconButton } from "@/components/IconButton";
+import { iconActionButtonProps } from "@/components/IconButton";
 import { useAudioRecording } from "@/hooks/useAudioRecording";
 import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
@@ -78,18 +79,25 @@ export default function NewDiaryEntry() {
         }
         bottomActions={
           <>
-            <IconButton
-              transparent
+            <Button
+              {...iconActionButtonProps}
               onPress={formActions.pickImage}
               icon={Camera}
             />
-            <IconButton
+            <Button
+              {...iconActionButtonProps}
               onPress={() => setIsRecordingSheetOpen(true)}
-              icon={Mic}
-              transparent
             />
-            <IconButton transparent onPress={handleSubmit} icon={Check} />
-            <IconButton transparent onPress={handleCancel} icon={X} />
+            <Button
+              {...iconActionButtonProps}
+              onPress={handleSubmit}
+              icon={Check}
+            />
+            <Button
+              {...iconActionButtonProps}
+              onPress={handleCancel}
+              icon={X}
+            />
           </>
         }
       />

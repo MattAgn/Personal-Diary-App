@@ -4,12 +4,12 @@ import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { XStack } from "tamagui";
+import { Button, XStack } from "tamagui";
 
 import { AudioRecordingSheet } from "@/components/AudioRecordingSheet";
 import { DiaryEntryDetails } from "@/components/DiaryEntryDetails";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
-import { IconButton } from "@/components/IconButton";
+import { iconActionButtonProps } from "@/components/IconButton";
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 import { useAudioRecording } from "@/hooks/useAudioRecording";
 import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
@@ -92,22 +92,26 @@ export default function DiaryEntry() {
           }
           bottomActions={
             <>
-              <IconButton
+              <Button
                 onPress={formActions.pickImage}
                 icon={Camera}
-                transparent
+                {...iconActionButtonProps}
               />
-              <IconButton
+              <Button
                 onPress={() => setIsRecordingSheetOpen(true)}
                 icon={Mic}
-                transparent
+                {...iconActionButtonProps}
               />
-              <IconButton onPress={saveEdits} icon={Check} transparent />
-              <IconButton
+              <Button
+                onPress={saveEdits}
+                icon={Check}
+                {...iconActionButtonProps}
+              />
+              <Button
                 onPress={() => showDeleteAlert()}
                 icon={Trash}
-                destructive
-                transparent
+                {...iconActionButtonProps}
+                color="$danger"
               />
             </>
           }
@@ -130,16 +134,16 @@ export default function DiaryEntry() {
       mainContent={<DiaryEntryDetails diaryEntry={entry} />}
       bottomActions={
         <XStack justifyContent="space-around">
-          <IconButton
+          <Button
             onPress={() => setIsEditing(true)}
             icon={PencilLine}
-            transparent
+            {...iconActionButtonProps}
           />
-          <IconButton
+          <Button
             onPress={() => showDeleteAlert()}
             icon={Trash}
             destructive
-            transparent
+            {...iconActionButtonProps}
           />
         </XStack>
       }

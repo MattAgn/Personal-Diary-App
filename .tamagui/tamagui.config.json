@@ -29005,10 +29005,10 @@
           "val": "#1C1C1E",
           "variable": ""
         },
-        "lightDark": {
+        "darkLight": {
           "isVar": true,
-          "key": "$lightDark",
-          "name": "c-lightDark",
+          "key": "$darkLight",
+          "name": "c-darkLight",
           "val": "#28282A",
           "variable": ""
         },
@@ -31509,10 +31509,10 @@
         "val": "#1C1C1E",
         "variable": ""
       },
-      "$color.lightDark": {
+      "$color.darkLight": {
         "isVar": true,
-        "key": "$lightDark",
-        "name": "c-lightDark",
+        "key": "$darkLight",
+        "name": "c-darkLight",
         "val": "#28282A",
         "variable": ""
       },
