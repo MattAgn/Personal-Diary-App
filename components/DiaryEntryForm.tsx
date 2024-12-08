@@ -1,8 +1,9 @@
 import { Input, Spacer, styled, TextArea, View, XStack } from "tamagui";
 
-import type { Label, Media } from "@/domain/DiaryEntry";
+import type { AudioRecording, Label, Media } from "@/domain/DiaryEntry";
 import { allLabels } from "@/domain/DiaryEntry";
 
+import { AudioPlayer } from "./AudioPlayer";
 import { LabelButton } from "./LabelButton";
 import { MediaWithFullScreenDisplay } from "./MediaWithFullScreenDisplay";
 
@@ -11,6 +12,7 @@ export type DiaryEntryFormData = {
   content: string;
   media: Media | null;
   labels: Label[];
+  audio: AudioRecording | null;
 };
 
 type DiaryEntryFormProps = {
@@ -21,6 +23,7 @@ type DiaryEntryFormProps = {
 
 export const DiaryEntryForm = ({
   title,
+  audio,
   setTitle,
   content,
   setContent,
@@ -33,6 +36,12 @@ export const DiaryEntryForm = ({
       {media ? (
         <View paddingHorizontal="$4" paddingBottom="$2">
           <MediaWithFullScreenDisplay media={media} />
+        </View>
+      ) : null}
+
+      {audio ? (
+        <View marginHorizontal="$4" marginBottom="$4">
+          <AudioPlayer audio={audio} />
         </View>
       ) : null}
 

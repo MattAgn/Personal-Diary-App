@@ -2,6 +2,7 @@ import { Spacer, Text, View, XStack } from "tamagui";
 
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 
+import { AudioPlayer } from "./AudioPlayer";
 import { LabelPill } from "./LabelPill";
 import { MediaWithFullScreenDisplay } from "./MediaWithFullScreenDisplay";
 
@@ -15,6 +16,13 @@ export const DiaryEntryDetails = ({ diaryEntry }: DiaryEntryDetailsProps) => {
       {diaryEntry.media ? (
         <>
           <MediaWithFullScreenDisplay media={diaryEntry.media} />
+          <Spacer scaleY={"$2"} />
+        </>
+      ) : null}
+
+      {diaryEntry.audio ? (
+        <>
+          <AudioPlayer audio={diaryEntry.audio} />
           <Spacer scaleY={"$2"} />
         </>
       ) : null}

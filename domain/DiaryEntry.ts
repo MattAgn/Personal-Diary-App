@@ -7,10 +7,7 @@ export type DiaryEntry = {
   createdAt: Date;
   media: Media | null;
   labels: Label[];
-  audio?: {
-    uri: string;
-    duration?: number;
-  } | null;
+  audio?: AudioRecording | null;
 };
 
 export const allLabels = [
@@ -26,4 +23,8 @@ export type Label = (typeof allLabels)[number];
 export type Media = {
   uri: string;
   type: ImagePickerAsset["type"];
+};
+export type AudioRecording = {
+  uri: string;
+  duration: number;
 };

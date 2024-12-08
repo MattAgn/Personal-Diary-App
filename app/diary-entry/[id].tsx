@@ -1,14 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Camera, Check, PencilLine, Trash } from "@tamagui/lucide-icons";
+import { Camera, Check, Mic, PencilLine, Trash } from "@tamagui/lucide-icons";
 import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { useAtom } from "jotai";
+import { useState } from "react";
 import { Alert } from "react-native";
 import { XStack } from "tamagui";
 
+import { AudioRecordingSheet } from "@/components/AudioRecordingSheet";
 import { DiaryEntryDetails } from "@/components/DiaryEntryDetails";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
 import { IconButton } from "@/components/IconButton";
 import type { DiaryEntry } from "@/domain/DiaryEntry";
+import { useAudioRecording } from "@/hooks/useAudioRecording";
 import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
 import {
   diaryEntriesAtom,
@@ -33,6 +36,10 @@ export default function DiaryEntry() {
     labels: entry?.labels,
   });
 
+  const { isRecording, startRecording, stopRecording, recordingToSave } =
+    useAudioRecording();
+  const [isRecordingSheetOpen, setIsRecordingSheetOpen] = useState(false);
+
   if (!entry) {
     return <Redirect href="/+not-found" />;
   }
@@ -43,7 +50,7 @@ export default function DiaryEntry() {
   };
 
   const saveEdits = () => {
-    setEntry(formData);
+    setEntry({ ...formData, audio: recordingToSave });
     setIsEditing(false);
   };
 
@@ -73,26 +80,47 @@ export default function DiaryEntry() {
 
   if (isEditing) {
     return (
-      <DiaryEntryModalLayout
-        title={formattedDate}
-        mainContent={<DiaryEntryForm {...formActions} {...formData} />}
-        bottomActions={
-          <>
-            <IconButton
-              onPress={formActions.pickImage}
-              icon={Camera}
-              transparent
+      <>
+        <DiaryEntryModalLayout
+          title={formattedDate}
+          mainContent={
+            <DiaryEntryForm
+              {...formActions}
+              {...formData}
+              audio={recordingToSave}
             />
-            <IconButton onPress={saveEdits} icon={Check} transparent />
-            <IconButton
-              onPress={() => showDeleteAlert()}
-              icon={Trash}
-              destructive
-              transparent
-            />
-          </>
-        }
-      />
+          }
+          bottomActions={
+            <>
+              <IconButton
+                onPress={formActions.pickImage}
+                icon={Camera}
+                transparent
+              />
+              <IconButton
+                onPress={() => setIsRecordingSheetOpen(true)}
+                icon={Mic}
+                transparent
+              />
+              <IconButton onPress={saveEdits} icon={Check} transparent />
+              <IconButton
+                onPress={() => showDeleteAlert()}
+                icon={Trash}
+                destructive
+                transparent
+              />
+            </>
+          }
+        />
+
+        <AudioRecordingSheet
+          isSheetOpen={isRecordingSheetOpen}
+          setIsSheetOpen={setIsRecordingSheetOpen}
+          isRecording={isRecording}
+          startRecording={startRecording}
+          stopRecording={stopRecording}
+        />
+      </>
     );
   }
 

@@ -1,12 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Camera, Check, X } from "@tamagui/lucide-icons";
+import { Camera, Check, Mic, X } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
+import { useState } from "react";
 import { Alert } from "react-native";
 import { v6 as uuidv6 } from "uuid";
 
+import { AudioRecordingSheet } from "@/components/AudioRecordingSheet";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
 import { IconButton } from "@/components/IconButton";
+import { useAudioRecording } from "@/hooks/useAudioRecording";
 import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
@@ -15,12 +18,17 @@ import { DiaryEntryModalLayout } from "../components/DiaryEntryModalLayout";
 export default function NewDiaryEntry() {
   const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
   const { formData, formActions } = useDiaryEntryForm();
+
+  const [isRecordingSheetOpen, setIsRecordingSheetOpen] = useState(false);
+  const { isRecording, startRecording, stopRecording, recordingToSave } =
+    useAudioRecording();
   const createdAt = new Date();
 
   const isFormEmpty =
     formData.title.length === 0 &&
     formData.content.length === 0 &&
-    formData.media === null;
+    formData.media === null &&
+    recordingToSave === null;
 
   const handleSubmit = () => {
     if (isFormEmpty) {
@@ -34,6 +42,7 @@ export default function NewDiaryEntry() {
         id: uuidv6(),
         createdAt,
         ...formData,
+        audio: recordingToSave,
       },
     ]);
     router.back();
@@ -57,20 +66,40 @@ export default function NewDiaryEntry() {
   });
 
   return (
-    <DiaryEntryModalLayout
-      title={formattedDate}
-      mainContent={<DiaryEntryForm {...formActions} {...formData} />}
-      bottomActions={
-        <>
-          <IconButton
-            transparent
-            onPress={formActions.pickImage}
-            icon={Camera}
+    <>
+      <DiaryEntryModalLayout
+        title={formattedDate}
+        mainContent={
+          <DiaryEntryForm
+            {...formActions}
+            {...formData}
+            audio={recordingToSave}
           />
-          <IconButton transparent onPress={handleSubmit} icon={Check} />
-          <IconButton transparent onPress={handleCancel} icon={X} />
-        </>
-      }
-    />
+        }
+        bottomActions={
+          <>
+            <IconButton
+              transparent
+              onPress={formActions.pickImage}
+              icon={Camera}
+            />
+            <IconButton
+              onPress={() => setIsRecordingSheetOpen(true)}
+              icon={Mic}
+              transparent
+            />
+            <IconButton transparent onPress={handleSubmit} icon={Check} />
+            <IconButton transparent onPress={handleCancel} icon={X} />
+          </>
+        }
+      />
+      <AudioRecordingSheet
+        isSheetOpen={isRecordingSheetOpen}
+        setIsSheetOpen={setIsRecordingSheetOpen}
+        isRecording={isRecording}
+        startRecording={startRecording}
+        stopRecording={stopRecording}
+      />
+    </>
   );
 }
