@@ -12,7 +12,7 @@ import { shareDiaryEntriesPdf } from "@/utils/shareDiaryEntriesPdf";
 import { JsStack } from "./_layout";
 
 export default function SettingsScreen() {
-  const [_, setDiaryEntries] = useAtom(diaryEntriesAtom);
+  const [diaryEntries, setDiaryEntries] = useAtom(diaryEntriesAtom);
 
   const onResetDiaryWithFakeData = () => {
     setDiaryEntries(fakeDiaryEntries);
@@ -39,7 +39,7 @@ export default function SettingsScreen() {
   };
 
   const handleShareDiaryEntries = async () => {
-    await shareDiaryEntriesPdf(fakeDiaryEntries);
+    await shareDiaryEntriesPdf(diaryEntries);
   };
 
   const header = () => (
