@@ -1,4 +1,4 @@
-import { FileDown, History } from "@tamagui/lucide-icons";
+import { CloudCog, FileDown, History } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { Alert } from "react-native";
@@ -59,6 +59,10 @@ export default function SettingsScreen() {
       <Spacer scaleY={"$2"} />
       <StyledButton icon={FileDown} onPress={handleShareDiaryEntries}>
         Export diary to pdf
+      </StyledButton>
+      <Spacer scaleY={"$2"} />
+      <StyledButton icon={CloudCog} onPress={() => router.push("/test")}>
+        Test
       </StyledButton>
     </Container>
   );

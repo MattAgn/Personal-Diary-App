@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import { Alert } from "react-native";
 import { Button, Spacer, TamaguiProvider, Text, View } from "tamagui";
 
+import { ModalHeader } from "@/components/ModalHeader";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
 
 import { tamaguiConfig } from "../tamagui.config";
@@ -55,6 +56,13 @@ export default function RootLayout() {
         <JsStack.Screen name="settings" options={modalOptions} />
         <JsStack.Screen name="new-diary-entry" options={modalOptions} />
         <JsStack.Screen name="diary-entry/[id]" options={modalOptions} />
+        <JsStack.Screen
+          name="test"
+          options={{
+            ...modalOptions,
+            header: () => <ModalHeader title="Test" />,
+          }}
+        />
       </JsStack>
       <StatusBar style="auto" />
     </TamaguiProvider>
