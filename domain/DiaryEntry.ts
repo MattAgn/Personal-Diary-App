@@ -7,6 +7,10 @@ export type DiaryEntry = {
   createdAt: Date;
   media: Media | null;
   labels: Label[];
+  audio?: {
+    uri: string;
+    duration?: number;
+  } | null;
 };
 
 export const allLabels = [
