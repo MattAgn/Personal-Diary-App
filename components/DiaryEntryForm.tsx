@@ -1,4 +1,4 @@
-import { Input, Spacer, styled, TextArea, XStack } from "tamagui";
+import { Input, Spacer, styled, TextArea, View, XStack } from "tamagui";
 
 import type { Label, Media } from "@/domain/DiaryEntry";
 import { allLabels } from "@/domain/DiaryEntry";
@@ -31,10 +31,9 @@ export const DiaryEntryForm = ({
   return (
     <>
       {media ? (
-        <>
+        <View paddingHorizontal="$4" paddingBottom="$2">
           <MediaWithFullScreenDisplay media={media} />
-          <Spacer scaleY={"$2"} />
-        </>
+        </View>
       ) : null}
 
       <LabelsRow>
