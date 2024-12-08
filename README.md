@@ -41,8 +41,7 @@ This is a small diary app built with Expo and Tamagui made for a technical inter
 - [x] Add an image to a diary entry.
 - [x] Export to PDF and share
 - [x] Add a video to a diary entry and play it.
-- [ ] Add audio notes (TODO)
-- [ ] Add icon & splash screen (TODO)
+- [x] Add audio notes
 - [x] Add animations (list, images)
 
 ## Screenshots & videos
