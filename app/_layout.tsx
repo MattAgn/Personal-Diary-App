@@ -16,6 +16,7 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
+import * as NavigationBar from "expo-navigation-bar";
 import type { ErrorBoundaryProps } from "expo-router";
 import { Stack, withLayoutContext } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -26,11 +27,14 @@ import { Alert } from "react-native";
 import { Button, Spacer, TamaguiProvider, Text, View } from "tamagui";
 
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
+import { Colors } from "@/theme";
 
 import { tamaguiConfig } from "../tamagui.config";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 void SplashScreen.preventAutoHideAsync();
+
+void NavigationBar.setBackgroundColorAsync(Colors.purpleLight);
 
 export default function RootLayout() {
   const [loaded] = useFonts({
