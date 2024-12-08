@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import { Camera, Check, X } from "@tamagui/lucide-icons";
+import { Camera, Check, Mic, X } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { useState } from "react";
@@ -87,6 +87,7 @@ export default function NewDiaryEntry() {
             <Button
               {...iconActionButtonProps}
               onPress={() => setIsRecordingSheetOpen(true)}
+              icon={Mic}
             />
             <Button
               {...iconActionButtonProps}
