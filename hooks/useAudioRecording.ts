@@ -4,6 +4,10 @@ import { Alert } from "react-native";
 
 import type { AudioRecording } from "@/domain/DiaryEntry";
 
+/**
+ * @warning On the Android emulator, you need to enable 'virtual microphone uses host audio input'
+ * in the developer options. Otherwise the audio will not be recorded.
+ */
 export const useAudioRecording = () => {
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
   const [isRecording, setIsRecording] = useState(false);

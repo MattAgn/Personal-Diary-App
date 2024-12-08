@@ -29,6 +29,10 @@ This is a small diary app built with Expo and Tamagui made for a technical inter
 
 > Warning: This app does not work on with Expo GO, step 2 is required.
 
+### Audio feature on Android
+
+On the Android emulator, you need to enable 'virtual microphone uses host audio input' in the developer options. Otherwise the audio will not be recorded.
+
 ## Features
 
 - [x] Add a new diary entry with a title, content.
