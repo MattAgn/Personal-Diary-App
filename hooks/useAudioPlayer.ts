@@ -1,3 +1,4 @@
+import type { AVPlaybackStatus } from "expo-av";
 import { Audio } from "expo-av";
 import { useEffect, useState } from "react";
 
@@ -38,16 +39,21 @@ export const useAudioPlayer = (audio: AudioRecording) => {
   useEffect(() => {
     if (!sound) return;
 
-    sound.setOnPlaybackStatusUpdate((status) => {
+    const onPlaybackStatusUpdate = async (status: AVPlaybackStatus) => {
       if (!status.isLoaded) return;
+
+      // Update playing state
+      setIsPlaying(status.isPlaying);
 
       if (status.didJustFinish) {
         setIsPlaying(false);
-        sound
-          .setPositionAsync(0)
-          .catch((e) => console.error("Error resetting sound", e));
+        // Stop the playback and reset position
+        await sound.stopAsync();
+        await sound.setPositionAsync(0);
       }
-    });
+    };
+
+    sound.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
   }, [sound]);
 
   return {
