@@ -45,10 +45,6 @@ This is a small diary app built with Expo and Tamagui made for a technical inter
 - [ ] Add icon & splash screen (TODO)
 - [x] Add animations (list, images)
 
-## Remaining tasks
-
-- [ ] Fix bug when keyboard is open
-
 ## Screenshots & videos
 
 Video of the app in on iOS simulator:
