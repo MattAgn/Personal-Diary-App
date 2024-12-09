@@ -69,7 +69,7 @@ export const DiaryEntryForm = ({
         fontSize={"$5"}
         value={content}
         onChangeText={setContent}
-        scrollEnabled={Platform.OS === "ios" ? false : true} // import on ios to have keyboard handling working
+        scrollEnabled={Platform.OS === "ios" ? false : true} // import on ios to have keyboard handling workingé
         numberOfLines={Platform.OS === "ios" ? undefined : 200} // use big number so that text area takes the rest of the screen on android
       />
     </>

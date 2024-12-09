@@ -2,7 +2,7 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import type { KeyboardEvent } from "react-native";
-import { Keyboard, Platform } from "react-native";
+import { Keyboard } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import {
   SafeAreaView,
@@ -28,17 +28,14 @@ export function DiaryEntryModalLayout({
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener(
-      Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow",
+      "keyboardWillShow",
       (e: KeyboardEvent) => {
         setKeyboardHeight(e.endCoordinates.height);
       },
     );
-    const hideSubscription = Keyboard.addListener(
-      Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide",
-      () => {
-        setKeyboardHeight(0);
-      },
-    );
+    const hideSubscription = Keyboard.addListener("keyboardWillHide", () => {
+      setKeyboardHeight(0);
+    });
 
     return () => {
       showSubscription.remove();
@@ -56,9 +53,7 @@ export function DiaryEntryModalLayout({
         enableOnAndroid
         keyboardShouldPersistTaps="handled"
         scrollToOverflowEnabled
-        extraScrollHeight={
-          Platform.OS === "ios" ? BUTTONS_BOTTOM_BAR_HEIGHT : 0
-        }
+        extraScrollHeight={BUTTONS_BOTTOM_BAR_HEIGHT}
         style={{ flex: 1 }}
         contentContainerStyle={{
           backgroundColor: Colors.dark,
