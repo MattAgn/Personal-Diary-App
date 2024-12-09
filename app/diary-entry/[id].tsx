@@ -4,12 +4,11 @@ import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { Button, XStack } from "tamagui";
 
 import { AudioRecordingSheet } from "@/components/AudioRecordingSheet";
 import { DiaryEntryDetails } from "@/components/DiaryEntryDetails";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
-import { iconActionButtonProps } from "@/components/IconButton";
+import { IconButton } from "@/components/IconButton";
 import type { DiaryEntry } from "@/domain/DiaryEntry";
 import { useAudioRecording } from "@/hooks/useAudioRecording";
 import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
@@ -92,25 +91,29 @@ export default function DiaryEntry() {
           }
           bottomActions={
             <>
-              <Button
+              <IconButton
                 onPress={formActions.pickImage}
                 icon={Camera}
-                {...iconActionButtonProps}
+                transparent
+                bottomAction
               />
-              <Button
+              <IconButton
                 onPress={() => setIsRecordingSheetOpen(true)}
                 icon={Mic}
-                {...iconActionButtonProps}
+                transparent
+                bottomAction
               />
-              <Button
+              <IconButton
                 onPress={saveEdits}
                 icon={Check}
-                {...iconActionButtonProps}
+                transparent
+                bottomAction
               />
-              <Button
+              <IconButton
                 onPress={() => showDeleteAlert()}
                 icon={Trash}
-                {...iconActionButtonProps}
+                transparent
+                bottomAction
                 color="$danger"
               />
             </>
@@ -133,19 +136,21 @@ export default function DiaryEntry() {
       title={formattedDate}
       mainContent={<DiaryEntryDetails diaryEntry={entry} />}
       bottomActions={
-        <XStack justifyContent="space-around">
-          <Button
+        <>
+          <IconButton
             onPress={() => setIsEditing(true)}
             icon={PencilLine}
-            {...iconActionButtonProps}
+            transparent
+            bottomAction
           />
-          <Button
+          <IconButton
             onPress={() => showDeleteAlert()}
-            icon={Trash}
             destructive
-            {...iconActionButtonProps}
+            icon={Trash}
+            transparent
+            bottomAction
           />
-        </XStack>
+        </>
       }
     />
   );

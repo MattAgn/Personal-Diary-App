@@ -55,6 +55,7 @@ export default function RootLayout() {
         <JsStack.Screen name="settings" options={modalOptions} />
         <JsStack.Screen name="new-diary-entry" options={modalOptions} />
         <JsStack.Screen name="diary-entry/[id]" options={modalOptions} />
+        <JsStack.Screen name="test" options={modalOptions} />
       </JsStack>
       <StatusBar style="auto" />
     </TamaguiProvider>

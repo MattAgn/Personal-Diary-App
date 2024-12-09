@@ -4,12 +4,11 @@ import { router } from "expo-router";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { Button } from "tamagui";
 import { v6 as uuidv6 } from "uuid";
 
 import { AudioRecordingSheet } from "@/components/AudioRecordingSheet";
 import { DiaryEntryForm } from "@/components/DiaryEntryForm";
-import { iconActionButtonProps } from "@/components/IconButton";
+import { IconButton } from "@/components/IconButton";
 import { useAudioRecording } from "@/hooks/useAudioRecording";
 import { useDiaryEntryForm } from "@/hooks/useDiaryEntryForm";
 import { diaryEntriesAtom } from "@/store/diaryEntriesAtom";
@@ -79,25 +78,29 @@ export default function NewDiaryEntry() {
         }
         bottomActions={
           <>
-            <Button
-              {...iconActionButtonProps}
+            <IconButton
+              transparent
               onPress={formActions.pickImage}
               icon={Camera}
+              bottomAction
             />
-            <Button
-              {...iconActionButtonProps}
+            <IconButton
+              transparent
               onPress={() => setIsRecordingSheetOpen(true)}
               icon={Mic}
+              bottomAction
             />
-            <Button
-              {...iconActionButtonProps}
+            <IconButton
+              transparent
               onPress={handleSubmit}
               icon={Check}
+              bottomAction
             />
-            <Button
-              {...iconActionButtonProps}
+            <IconButton
+              transparent
               onPress={handleCancel}
               icon={X}
+              bottomAction
             />
           </>
         }

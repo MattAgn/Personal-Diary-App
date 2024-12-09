@@ -4,8 +4,6 @@ export const IconButton = styled(Button, {
   size: "$8",
   circular: true,
   pressStyle: {
-    backgroundColor: "$colorTransparent",
-    borderColor: "$colorTransparent",
     opacity: 0.5,
   },
   variants: {
@@ -29,22 +27,17 @@ export const IconButton = styled(Button, {
         elevation: 6,
       },
     },
+    bottomAction: {
+      true: {
+        size: "$9",
+        // this is very important because circular buttons are more likely to get stuck in pressed state
+        // if too close to the bottom of the screen on ios by overlapping on the area reserved for the navigation bar (even with SafeAreaView)
+        circular: false,
+        pressStyle: {
+          backgroundColor: "$greyPurple",
+          borderColor: "$greyPurple",
+        },
+      },
+    },
   },
 });
-
-/**
- * Used on action buttons in the new diary entry screen and the diary-entry/[id] screen.
- * For some unknown reason, the buttons don't behave properly (not always clickable)
- * when using the styled(Button) directly. Seems also to be linked with the "transparent" pressed style but not sure
- */
-export const iconActionButtonProps = {
-  color: "white",
-  size: "$8",
-  circular: true,
-  backgroundColor: "$darkLightBackground",
-  pressStyle: {
-    opacity: 0.5,
-    backgroundColor: "$greyPurple",
-    borderColor: "$greyPurple",
-  },
-};
