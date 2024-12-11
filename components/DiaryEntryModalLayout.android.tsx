@@ -1,8 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import type React from "react";
-import { KeyboardAvoidingView, Platform } from "react-native";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView, styled, XStack, YStack } from "tamagui";
+import { styled, XStack } from "tamagui";
 
 import { JsStack } from "@/app/_layout";
 import { Colors } from "@/theme";
@@ -23,34 +22,32 @@ export function DiaryEntryModalLayout({
       edges={["bottom"]}
       style={{ flex: 1, backgroundColor: Colors.darkLight }}
     >
+      <JsStack.Screen options={{ header }} />
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 160 : undefined}
+        style={{ flex: 1, backgroundColor: Colors.dark }}
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: "space-between",
+          backgroundColor: Colors.dark,
+        }}
+        behavior="height"
+        keyboardVerticalOffset={-BUTTONS_BOTTOM_BAR_HEIGHT}
       >
-        <ContentContainer>
-          <JsStack.Screen options={{ header }} />
-          <ScrollView contentContainerStyle={{ paddingHorizontal: "$1" }}>
-            {mainContent}
-          </ScrollView>
-
-          <BottomActionsBar>{bottomActions}</BottomActionsBar>
-        </ContentContainer>
+        <ScrollView keyboardShouldPersistTaps="handled">
+          {mainContent}
+        </ScrollView>
+        <BottomActionsBar>{bottomActions}</BottomActionsBar>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
-const ContentContainer = styled(YStack, {
-  justifyContent: "space-between",
-  flex: 1,
-  backgroundColor: "$background",
-});
-
 const BottomActionsBar = styled(XStack, {
   justifyContent: "space-around",
   backgroundColor: "$darkLightBackground",
-  paddingTop: "$2",
+  paddingVertical: "$2",
+  width: "100%",
+  height: BUTTONS_BOTTOM_BAR_HEIGHT,
 });
 
 type DiaryEntryModalLayoutProps = {
