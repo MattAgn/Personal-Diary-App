@@ -1,8 +1,17 @@
-# Diary test app
+# Diary app
 
 ## Description
 
-This is a small diary app built with Expo and Tamagui made for a technical interview.
+This is a small personal diary app built with Expo and Tamagui made for a technical interview. It is based on the native iOS "Journal" app.
+Constraints: 
+- Technologies: use expo, jotai, tamagui
+- Time to build: 7 days
+
+## What it looks like
+
+Video of the app in on iOS simulator:
+
+https://github.com/user-attachments/assets/1b91a44b-0244-41e5-a794-7dab946572cc
 
 ## Get started
 
@@ -48,11 +57,7 @@ On the Android emulator, you need to enable 'virtual microphone uses host audio 
 - [x] Add audio notes
 - [x] Add animations (list, images)
 
-## Screenshots & videos
-
-Video of the app in on iOS simulator:
-
-https://github.com/user-attachments/assets/1b91a44b-0244-41e5-a794-7dab946572cc
+## Screenshots 
 
 
 | Page             | iOS                                               | Android                                                   |
